@@ -12,6 +12,46 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="js/jquery-1.11.0.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script>
+            $(function() {
+                $('#chart-container').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Student Satisfaction'
+                    },
+                    xAxis: {
+                        categories: ['Satisfaction']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Students'
+                        }
+                    },
+                    series: [{
+                            name: 'Very Satisfied',
+                            data: [10]
+                        }, {
+                            name: 'Satisfied',
+                            data: [5]
+                        }, {
+                            name: 'Above Average',
+                            data: [7]
+                        }, {
+                            name: 'Below Average',
+                            data: [4]
+                        }, {
+                            name: 'Unsatisfied',
+                            data: [2]
+                        }, {
+                            name: 'Very Unsatisfied',
+                            data: [6]
+                        }]
+                });
+            });
+        </script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style1.css" rel="stylesheet">
         <title>Subject Administration</title>
@@ -52,7 +92,7 @@
                     <tr>
                         <td class="td-subject-id">${s.SId}</td>
                         <td>${s.subjectname}</td>
-                        
+
                         <td>${fn:substring(s.description,0,65)}...</td>
                         <td class="td-subject-votes">0</td>
                         <td class="td-subject-pool">A:<input type="radio" name="pool${s.SId}" value="a" <c:if test="${s.pool == 'A'}">CHECKED</c:if>></td>
@@ -61,8 +101,7 @@
                         </tr>
                 </c:forEach>
             </table>
-
-            <!-- Create boxes and ajax call for satisfaction display-->
+            <div id="chart-container" style="width:100%; height:400px;"></div>
         </div>
     </body>
 </html>
