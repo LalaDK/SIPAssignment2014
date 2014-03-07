@@ -11,7 +11,7 @@ import java.util.Collection;
 import javax.ejb.Local;
 
 @Local
-public interface IEntityManager {
+public interface IDataManager {
 
     public Collection<Subject> getAllSubjects();
 

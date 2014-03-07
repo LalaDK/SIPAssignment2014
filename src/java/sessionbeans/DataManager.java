@@ -8,7 +8,7 @@ package sessionbeans;
 import entities.Person;
 import entities.Round;
 import entities.Subject;
-import interfaces.IEntityManager;
+import interfaces.IDataManager;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,7 +20,7 @@ import javax.persistence.PersistenceContext;
  * @author Mads
  */
 @Stateless
-public class EntityManager implements IEntityManager {
+public class DataManager implements IDataManager {
 
     @PersistenceContext(unitName = "SIPAssignment2014PU")
     private javax.persistence.EntityManager em;

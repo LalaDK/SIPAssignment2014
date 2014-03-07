@@ -5,6 +5,7 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -47,19 +48,20 @@
                     <th>Votes</th>
                     <th colspan="3">Pool</th>
                 </tr>
-                <tr>
-                    <td class="td-subject-id">test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td class="td-subject-votes">test</td>
-                    <td class="td-subject-pool">A: <input type="radio" name="pool" value="a"></td>
-                    <td class="td-subject-pool">B: <input type="radio" name="pool" value="b"></td>
-                    <td class="td-subject-pool">C: <input type="radio" name="pool" value="c"></td>
-                    
-                </tr>
+                <c:forEach var="s" items="${subjects}">
+                    <tr>
+                        <td class="td-subject-id">${s.SId}</td>
+                        <td>${s.subjectname}</td>
                         
+                        <td>${fn:substring(s.description,0,65)}...</td>
+                        <td class="td-subject-votes">0</td>
+                        <td class="td-subject-pool">A:<input type="radio" name="pool${s.SId}" value="a" <c:if test="${s.pool == 'A'}">CHECKED</c:if>></td>
+                        <td class="td-subject-pool">B:<input type="radio" name="pool${s.SId}" value="b" <c:if test="${s.pool == 'B'}">CHECKED</c:if>></td>
+                        <td class="td-subject-pool">C:<input type="radio" name="pool${s.SId}" value="c" <c:if test="${s.pool == 'C'}">CHECKED</c:if>></td>
+                        </tr>
+                </c:forEach>
             </table>
-            
+
             <!-- Create boxes and ajax call for satisfaction display-->
         </div>
     </body>

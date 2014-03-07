@@ -3,42 +3,77 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package servlets;
 
-import controller.Controller;
-import interfaces.IController;
+import interfaces.IDataManager;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import sessionbeans.DataManager;
 
 /**
  *
  * @author Thomas
  */
-@WebServlet(name = "AdminPoolSelectionController", urlPatterns = {"/AdminPoolSelectionController"})
+@WebServlet(name = "AdminPoolSelection", urlPatterns = {"/AdminPoolSelection"})
 public class AdminPoolSelection extends HttpServlet {
+    @EJB
+    private IDataManager dataManager;
 
-    protected void service(HttpServletRequest request, HttpServletResponse response)
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-
-        IController control = new Controller();
-//        request.setAttribute("subjects", control.getSubjectsForRound(2));
-//        request.setAttribute("satisfaction", control.getSatisfaction());
+        request.setAttribute("subjects", dataManager.getAllSubjectsFromRound(2));
         
-
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/AdminPoolSelection.jsp");
-        dispatcher.forward(request, response);
+                RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/AdminPoolSelection.jsp");
+        dis.forward(request, response);
     }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
 }
