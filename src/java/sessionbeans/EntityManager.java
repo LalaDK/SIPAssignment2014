@@ -32,16 +32,18 @@ public class EntityManager implements IEntityManager {
 
     @Override
     public Collection<Subject> getAllSubjectsFromRound(int round) {
+        // Hent runder hvor rundno er den givne parameter
         List<Round> subjectsInRound = em.createNamedQuery("Round.findByRoundno", Round.class).setParameter("roundno", round).getResultList();
-        
-        System.out.println(subjectsInRound.size());
-            
-        List<Subject> subjects = new ArrayList<>();
+
+        // Resultatliste
+        List<Subject> result = new ArrayList<>();
+
+        // For hver runde (som alle er den givne runde), tilføj faget til resultatlisten
         for (int i = 0; i < subjectsInRound.size(); i++) {
-            Subject s = em.createNamedQuery("Subject.findBySId", Subject.class).setParameter("sId", subjectsInRound.get(i).getSId().getSId()).getSingleResult();
-            subjects.add(s);
+            Subject s = subjectsInRound.get(i).getSId();
+            result.add(s);
         }
-        return subjects;
+        return result;
     }
 
     @Override
