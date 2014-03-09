@@ -8,6 +8,7 @@ package sessionbeans;
 import entities.Person;
 import entities.Round;
 import entities.Subject;
+import entities.Vote;
 import interfaces.IEntityManager;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,17 +49,33 @@ public class EntityManager implements IEntityManager {
 
     @Override
     public int getAmountOfVotesFromSubject(int round, int subjectId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.createNamedQuery("Vote.findBySIdAndRId").setParameter("rId", round).setParameter("sId", subjectId).getResultList().size();
     }
 
     @Override
     public Collection<Person> getAllPersonsInRound(int round) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // Få fat i runder med givne rundenummer
+        Collection<Round> rounds = em.createNamedQuery("Round.findByRoundno").setParameter("roundno", round).getResultList();
+        
+        // Hent alle stemmer fra de runder
+        Collection<Vote> votes = new ArrayList<>();        
+        for(Round value : rounds) {
+            votes.addAll(value.getVoteCollection());
+        }        
+        
+        // Hent person fra stemme. 
+        Collection<Person> persons = new ArrayList<>();
+        for (Vote vote : votes) {
+            persons.add(vote.getPerson());
+        }
+        return persons;
     }
 
     @Override
     public void saveAllSubjects(Collection<Subject> subjects) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(Subject subject : subjects) {
+            em.persist(subject);
+        }
     }
 
     // Add business logic below. (Right-click in editor and choose
