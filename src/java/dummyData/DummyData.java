@@ -43,49 +43,49 @@ public class DummyData implements IDataManager {
         Csharp.setSId(new BigDecimal(String.valueOf(1)));
         Csharp.setSubjectname("C#");
         Csharp.setDescription("Test Description");
-        Csharp.setPool('A');
+        Csharp.setPool('a');
 
         Subject SWDesign = new Subject();
         SWDesign.setSId(new BigDecimal(String.valueOf(2)));
         SWDesign.setSubjectname("Software Design");
         SWDesign.setDescription("Test Description");
-        SWDesign.setPool('A');
+        SWDesign.setPool('b');
 
         Subject Android = new Subject();
         Android.setSId(new BigDecimal(String.valueOf(3)));
         Android.setSubjectname("Android");
         Android.setDescription("Test Description");
-        Android.setPool('A');
+        Android.setPool('c');
 
         Subject Python = new Subject();
         Python.setSId(new BigDecimal(String.valueOf(4)));
         Python.setSubjectname("Python");
         Python.setDescription("Test Description");
-        Python.setPool('A');
+        Python.setPool('c');
 
         Subject MordernFunc = new Subject();
         MordernFunc.setSId(new BigDecimal(String.valueOf(5)));
         MordernFunc.setSubjectname("Mordern Functional Programming");
         MordernFunc.setDescription("Test Description");
-        MordernFunc.setPool('B');
+        MordernFunc.setPool('c');
 
         Subject Databases = new Subject();
         Databases.setSId(new BigDecimal(String.valueOf(6)));
         Databases.setSubjectname("Databases");
         Databases.setDescription("Test Description");
-        Databases.setPool('B');
+        Databases.setPool('c');
 
         Subject TDD = new Subject();
         TDD.setSId(new BigDecimal(String.valueOf(7)));
         TDD.setSubjectname("Testdriven Developement");
         TDD.setDescription("Test Description");
-        TDD.setPool('B');
+        TDD.setPool('c');
 
         Subject Games = new Subject();
         Games.setSId(new BigDecimal(String.valueOf(8)));
         Games.setSubjectname("Games");
         Games.setDescription("Test Description");
-        Games.setPool('B');
+        Games.setPool('c');
 
         subjects.add(Csharp);
         subjects.add(Android);
@@ -256,12 +256,19 @@ public class DummyData implements IDataManager {
 
     @Override
     public int getAmountOfVotesFromSubject(int round, int subjectId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int result = 0;
+        for(Vote v : votes){
+            if((v.getRound().getRId() == new BigDecimal(String.valueOf(round)) && (v.getSubject().getSId() == new BigDecimal(String.valueOf(subjectId))))){
+                result++;
+            }
+        }
+        return result;
     }
 
     @Override
     public Collection<Person> getAllPersonsInRound(int round) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Needs work, all persons in all rounds
+        return persons;
     }
 
     @Override
@@ -271,7 +278,7 @@ public class DummyData implements IDataManager {
 
     @Override
     public Collection<Subject> getSubjectsFromPool(char pool) {
-        Collection<Subject> tmp = null;
+        Collection<Subject> tmp = new ArrayList<>();
         for (Subject s : subjects) {
             if (s.getPool() == pool){
                 tmp.add(s);
@@ -284,5 +291,6 @@ public class DummyData implements IDataManager {
     public Collection<Person> getAllPersons() {
         return persons;
     }
+    
 
 }
