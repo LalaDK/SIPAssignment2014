@@ -15,7 +15,7 @@
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <script>
             $(document).ready(function(data) {
-
+                drawChart();
             });
 
             function getSatisfaction() {
@@ -23,7 +23,7 @@
                     url: "UpdateSatisfaction",
                     cache: false,
                     dataType: "json",
-                    success: drawChart
+                    success: updateChart
                 });
             }
 
@@ -44,7 +44,7 @@
                 });
             }
 
-            function drawChart(data) {
+            function updateChart(data) {
                 $('#chart-container').highcharts({
                     chart: {
                         type: 'column'
@@ -78,6 +78,44 @@
                         }, {
                             name: 'Very Unsatisfied',
                             data: [data["very_unsatisfied"]]
+                        }]
+                });
+            }
+
+            function drawChart() {
+                $('#chart-container').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Student Satisfaction'
+                    },
+                    xAxis: {
+                        categories: ['Satisfaction']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Students'
+                        }
+                    },
+                    series: [{
+                            name: 'Very Satisfied',
+                            data: [0]
+                        }, {
+                            name: 'Satisfied',
+                            data: [0]
+                        }, {
+                            name: 'Above Average',
+                            data: [0]
+                        }, {
+                            name: 'Below Average',
+                            data: [0]
+                        }, {
+                            name: 'Unsatisfied',
+                            data: [0]
+                        }, {
+                            name: 'Very Unsatisfied',
+                            data: [0]
                         }]
                 });
             }
