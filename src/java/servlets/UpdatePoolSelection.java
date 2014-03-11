@@ -33,7 +33,8 @@ public class UpdatePoolSelection extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println();
+        System.out.println("HERE!!");
+        System.out.println(request.getParameter("name"));
         
     }
 
