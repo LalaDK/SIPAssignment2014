@@ -8,6 +8,7 @@ package servlets;
 
 import interfaces.IDataManager;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
