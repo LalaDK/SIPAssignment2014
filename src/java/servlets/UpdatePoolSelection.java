@@ -6,6 +6,8 @@
 
 package servlets;
 
+import dummyData.DummyData;
+import interfaces.IDataManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -33,7 +35,11 @@ public class UpdatePoolSelection extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println();
+        IDataManager data = DummyData.getInstance();
+        System.out.println("HERE!!");
+        
+        System.out.println(request.getParameter("id"));
+        System.out.println(request.getParameter("pool"));
         
     }
 

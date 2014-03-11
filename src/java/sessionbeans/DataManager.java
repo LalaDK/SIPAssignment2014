@@ -97,4 +97,9 @@ public class DataManager implements IDataManager {
     public Collection<Person> getAllPersons() {
         return em.createNamedQuery("Person.findAll").getResultList();
     }
+
+    @Override
+    public void updatePoolOnSubject(int subjectId, char pool) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

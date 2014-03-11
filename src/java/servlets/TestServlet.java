@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import dummyData.DummyData;
 import entities.Person;
 import entities.Subject;
 import interfaces.IDataManager;
@@ -26,8 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
 public class TestServlet extends HttpServlet {
 
-    @EJB
-    private IDataManager entityManager;
+//    @EJB
+    private IDataManager entityManager = DummyData.getInstance();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

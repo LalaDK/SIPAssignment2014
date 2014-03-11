@@ -26,4 +26,6 @@ public interface IDataManager {
     public Collection<Subject> getSubjectsFromPool(char pool);
 
     public Collection<Person> getAllPersons();
+    
+    public void updatePoolOnSubject(int subjectId, char pool);
 }
