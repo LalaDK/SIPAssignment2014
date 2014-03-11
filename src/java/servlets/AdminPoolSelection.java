@@ -22,7 +22,7 @@ import sessionbeans.DataManager;
 @WebServlet(name = "AdminPoolSelection", urlPatterns = {"/AdminPoolSelection"})
 public class AdminPoolSelection extends HttpServlet {
 //    @EJB
-    private IDataManager dataManager = new DummyData();
+    private IDataManager dataManager = DummyData.getInstance();
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -21,6 +21,7 @@ import java.util.Collection;
  */
 public class DummyData implements IDataManager {
 
+    public static DummyData instance;
     Collection<Subject> subjects;
     Collection<Person> persons;
     Collection<Vote> votes;
@@ -29,7 +30,7 @@ public class DummyData implements IDataManager {
     Collection<Vote> nicklasvote;
     Collection<Vote> henrikote;
 
-    public DummyData() {
+    private DummyData() {
         subjects = new ArrayList<>();
         persons = new ArrayList<>();
         votes = new ArrayList<>();
@@ -243,6 +244,13 @@ public class DummyData implements IDataManager {
         nicklas.setVoteCollection(nicklasvote);
     }
 
+    public static DummyData getInstance(){
+        if(instance == null){
+            instance = new DummyData();
+        }
+        return instance;
+    }
+    
     @Override
     public Collection<Subject> getAllSubjects() {
         return subjects;

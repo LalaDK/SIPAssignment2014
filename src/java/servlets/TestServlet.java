@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TestServlet extends HttpServlet {
 
 //    @EJB
-    private IDataManager entityManager = new DummyData();
+    private IDataManager entityManager = DummyData.getInstance();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
