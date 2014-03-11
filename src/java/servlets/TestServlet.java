@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import entities.Person;
 import entities.Subject;
 import interfaces.IDataManager;
 import java.io.IOException;
@@ -41,19 +42,39 @@ public class TestServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            String str = "";
+            
+            // getAllSubjectsFromRound(2)
+            String subjectFromRound2 = "";
             Collection<Subject> subjects = entityManager.getAllSubjectsFromRound(2);
             for (Subject value : subjects) {
-                str += "<h2>" + value.getSubjectname() + "</h2> - " + value.getDescription() + "<br><br>";
+                subjectFromRound2 += value.getSubjectname() + "<br>";
             }
-            /* TODO output your page here. You may use following sample code. */
+            
+            // getAmountOfVotesFromSubject
+            int amountOfVotesFromRound2Subject6 = entityManager.getAmountOfVotesFromSubject(2, 6);
+
+            
+            // getAllPersonsInRound
+            Collection<Person> persons = entityManager.getAllPersonsInRound(2);
+            String personsInRound2 = "";
+            for(Person person : persons) {
+                personsInRound2 += person.getName() + "<br>";
+            }
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet TestServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<b>Subjects in round 2:</b><br>" + str);
+            
+            out.println("<b>getAllSubjectsFromRound(2)</b><br>" + subjectFromRound2 + "<br><br>");
+            
+            out.println("<b>amountOfVotesFromRound2Subject6</b><br>" + amountOfVotesFromRound2Subject6 + "<br><br>");
+            
+            out.println("<b>getAllPersonsInRound(2)</b><br>" + personsInRound2 + "<br><br>");
+                        
+            out.println("<b>Subjects in round 2:</b><br>" + subjectFromRound2);
             out.println("</body>");
             out.println("</html>");
         }

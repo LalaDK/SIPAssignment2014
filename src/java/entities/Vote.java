@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vote.findAll", query = "SELECT v FROM Vote v"),
+    @NamedQuery(name = "Vote.findBySIdAndRId", query = "SELECT v FROM Vote v WHERE v.votePK.rId = :rId AND v.votePK.sId = :sId"),
     @NamedQuery(name = "Vote.findByPId", query = "SELECT v FROM Vote v WHERE v.votePK.pId = :pId"),
     @NamedQuery(name = "Vote.findByRId", query = "SELECT v FROM Vote v WHERE v.votePK.rId = :rId"),
     @NamedQuery(name = "Vote.findBySId", query = "SELECT v FROM Vote v WHERE v.votePK.sId = :sId"),
