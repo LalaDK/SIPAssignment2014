@@ -66,6 +66,7 @@ public class DataManager implements IDataManager {
         // Hent person fra stemme. 
         Collection<Person> persons = new ArrayList<>();
         for (Vote vote : votes) {
+            
             persons.add(vote.getPerson());
         }
         return persons;
@@ -78,5 +79,21 @@ public class DataManager implements IDataManager {
 
     public void persist(Object object) {
         em.persist(object);
+    }
+
+//    @Override
+//    public Collection<Subject> getSubjectsFromPool(char pool) {
+//        Collection result = em.createNamedQuery("Subject.findByPool", Subject.class).setParameter("pool", pool).getResultList();
+//        return result;
+//    }
+
+    @Override
+    public Collection<Subject> getSubjectsFromPool(char pool) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Collection<Person> getAllPersons() {
+    return em.createNamedQuery("Person.findAll").getResultList();
     }
 }

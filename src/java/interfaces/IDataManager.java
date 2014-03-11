@@ -22,4 +22,8 @@ public interface IDataManager {
     public Collection<Person> getAllPersonsInRound(int round);
 
     public void saveAllSubjects(Collection<Subject> subjects);
+    
+    public Collection<Subject> getSubjectsFromPool(char pool);
+
+    public Collection<Person> getAllPersons();
 }

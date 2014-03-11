@@ -10,6 +10,7 @@ import entities.Subject;
 import interfaces.IDataManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -60,6 +61,17 @@ public class TestServlet extends HttpServlet {
             for(Person person : persons) {
                 personsInRound2 += person.getName() + "<br>";
             }
+            
+            
+            
+            // Test utility class
+            ArrayList<Subject> allSubjects = new ArrayList<>();
+            allSubjects.addAll(entityManager.getAllSubjects());
+            
+            ArrayList<Person> allPersons = new ArrayList<>();
+            allPersons.addAll(entityManager.getAllPersons());
+            
+            utilities.Utilities.getSatisfaction(allSubjects, allPersons);
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
