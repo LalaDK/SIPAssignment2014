@@ -27,36 +27,6 @@
                 });
             }
 
-            function testAjax(data) {
-                var options = {
-                    chart: {
-                        renderTo: 'chart-container',
-                        type: 'column'
-                    },
-                    series: [{
-                            name: 'Very Satisfied',
-                            data: [data["very_satisfied"]]
-                        }, {
-                            name: 'Satisfied',
-                            data: [data["satisfied"]]
-                        }, {
-                            name: 'Above Average',
-                            data: [data["above_average"]]
-                        }, {
-                            name: 'Below Average',
-                            data: [data["below_average"]]
-                        }, {
-                            name: 'Unsatisfied',
-                            data: [data["unsatisfied"]]
-                        }, {
-                            name: 'Very Unsatisfied',
-                            data: [data["very_unsatisfied"]]
-                        }]
-                };
-                options.series[0].data = data;
-
-            }
-
             function poolsChanged(pool) {
                 var subject = {id: pool.name, pool: pool.value};
                 updatePool(subject);
@@ -67,39 +37,12 @@
                 $.ajax({
                     url: "SavePoolSelection",
                     data: subject,
+                    async: false,
                     type: 'POST',
                     cache: false,
                     dataType: "json",
                 });
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             function drawChart(data) {
                 $('#chart-container').highcharts({
@@ -138,7 +81,7 @@
                         }]
                 });
             }
-            ;
+
         </script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style1.css" rel="stylesheet">
