@@ -6,6 +6,7 @@
 
 package servlets;
 
+import dummyData.DummyData;
 import interfaces.IDataManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,14 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sessionbeans.DataManager;
 
-/**
- *
- * @author Thomas
- */
 @WebServlet(name = "AdminPoolSelection", urlPatterns = {"/AdminPoolSelection"})
 public class AdminPoolSelection extends HttpServlet {
-    @EJB
-    private IDataManager dataManager;
+//    @EJB
+    private IDataManager dataManager = new DummyData();
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
