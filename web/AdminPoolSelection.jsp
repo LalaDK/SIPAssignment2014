@@ -14,43 +14,57 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <script>
-            $(function() {
-                $('#chart-container').highcharts({
-                    chart: {
-                        type: 'column'
-                    },
-                    title: {
-                        text: 'Student Satisfaction'
-                    },
-                    xAxis: {
-                        categories: ['Satisfaction']
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Students'
-                        }
-                    },
-                    series: [{
-                            name: 'Very Satisfied',
-                            data: [10]
-                        }, {
-                            name: 'Satisfied',
-                            data: [5]
-                        }, {
-                            name: 'Above Average',
-                            data: [7]
-                        }, {
-                            name: 'Below Average',
-                            data: [4]
-                        }, {
-                            name: 'Unsatisfied',
-                            data: [2]
-                        }, {
-                            name: 'Very Unsatisfied',
-                            data: [6]
-                        }]
+            var data = {"name":"abc","address":"cde"};
+            $(document).ready(function() {
+                $(".td-subject-pool").change(function() {
+                    $.ajax({
+                        url: "UpdatePoolSelection",
+                        data:data,
+                        type: 'POST',
+                        cache: false,
+                        dataType: "json",
+                        success: updateChart()
+                    });
                 });
             });
+                    function updateChart() {
+                        $('#chart-container').highcharts({
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'Student Satisfaction'
+                            },
+                            xAxis: {
+                                categories: ['Satisfaction']
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Students'
+                                }
+                            },
+                            series: [{
+                                    name: 'Very Satisfied',
+                                    data: [10]
+                                }, {
+                                    name: 'Satisfied',
+                                    data: [5]
+                                }, {
+                                    name: 'Above Average',
+                                    data: [7]
+                                }, {
+                                    name: 'Below Average',
+                                    data: [4]
+                                }, {
+                                    name: 'Unsatisfied',
+                                    data: [2]
+                                }, {
+                                    name: 'Very Unsatisfied',
+                                    data: [6]
+                                }]
+                        });
+                    }
+            ;
         </script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style1.css" rel="stylesheet">
