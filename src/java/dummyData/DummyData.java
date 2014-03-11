@@ -291,6 +291,15 @@ public class DummyData implements IDataManager {
     public Collection<Person> getAllPersons() {
         return persons;
     }
+
+    @Override
+    public void updatePoolOnSubject(int subjectId, char pool) {
+    for(Subject s : subjects){
+        if(s.getSId() == new BigDecimal(String.valueOf(subjectId))){
+            s.setPool(pool);
+        }
+    }
+    }
     
 
 }

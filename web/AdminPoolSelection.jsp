@@ -14,56 +14,65 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <script>
-            var data = {"name":"abc","address":"cde"};
+            var data = {"name": "abc", "address": "cde"};
             $(document).ready(function() {
-                $(".td-subject-pool").change(function() {
-                    $.ajax({
-                        url: "UpdatePoolSelection",
-                        data:data,
-                        type: 'POST',
-                        cache: false,
-                        dataType: "json",
-                        success: updateChart()
-                    });
-                });
+                drawChart();
             });
-                    function updateChart() {
-                        $('#chart-container').highcharts({
-                            chart: {
-                                type: 'column'
-                            },
-                            title: {
-                                text: 'Student Satisfaction'
-                            },
-                            xAxis: {
-                                categories: ['Satisfaction']
-                            },
-                            yAxis: {
-                                title: {
-                                    text: 'Students'
-                                }
-                            },
-                            series: [{
-                                    name: 'Very Satisfied',
-                                    data: [10]
-                                }, {
-                                    name: 'Satisfied',
-                                    data: [5]
-                                }, {
-                                    name: 'Above Average',
-                                    data: [7]
-                                }, {
-                                    name: 'Below Average',
-                                    data: [4]
-                                }, {
-                                    name: 'Unsatisfied',
-                                    data: [2]
-                                }, {
-                                    name: 'Very Unsatisfied',
-                                    data: [6]
-                                }]
-                        });
-                    }
+
+            function poolsChanged(pool) {
+                var subject = {id: pool.name, pool: pool.value};
+                alert(JSON.stringify(subject));
+                updatePool(subject);
+            }
+
+            function updatePool(subject) {
+                $.ajax({
+                    url: "UpdatePoolSelection",
+                    data: subject,
+                    type: 'POST',
+                    cache: false,
+                    dataType: "json",
+                    success: drawChart()
+                });
+            }
+
+            function drawChart() {
+                $('#chart-container').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Student Satisfaction'
+                    },
+                    xAxis: {
+                        categories: ['Satisfaction']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Students'
+                        }
+                    },
+                    series: [{
+                            name: 'Very Satisfied',
+                            data: [0]
+                        }, {
+                            name: 'Satisfied',
+                            data: [0]
+                        }, {
+                            name: 'Above Average',
+                            data: [0]
+                        }, {
+                            name: 'Below Average',
+                            data: [0]
+                        }, {
+                            name: 'Unsatisfied',
+                            data: [0]
+                        }, {
+                            name: 'Very Unsatisfied',
+                            data: [0]
+                        }]
+                });
+            }
             ;
         </script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -109,9 +118,9 @@
 
                         <td>${fn:substring(s.description,0,65)}...</td>
                         <td class="td-subject-votes">0</td>
-                        <td class="td-subject-pool">A:<input type="radio" name="pool${s.SId}" value="a" <c:if test="${s.pool == 'A'}">CHECKED</c:if>></td>
-                        <td class="td-subject-pool">B:<input type="radio" name="pool${s.SId}" value="b" <c:if test="${s.pool == 'B'}">CHECKED</c:if>></td>
-                        <td class="td-subject-pool">C:<input type="radio" name="pool${s.SId}" value="c" <c:if test="${s.pool == 'C'}">CHECKED</c:if>></td>
+                        <td class="td-subject-pool">A:<input type="radio" onchange="poolsChanged(this)" name="${s.SId}" value="a" <c:if test="${s.pool == 'a'}">CHECKED</c:if>></td>
+                        <td class="td-subject-pool">B:<input type="radio" onchange="poolsChanged(this)" name="${s.SId}" value="b" <c:if test="${s.pool == 'b'}">CHECKED</c:if>></td>
+                        <td class="td-subject-pool">C:<input type="radio" onchange="poolsChanged(this)" name="${s.SId}" value="c" <c:if test="${s.pool == 'c'}">CHECKED</c:if>></td>
                         </tr>
                 </c:forEach>
             </table>

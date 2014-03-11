@@ -34,7 +34,8 @@ public class UpdatePoolSelection extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         System.out.println("HERE!!");
-        System.out.println(request.getParameter("name"));
+        System.out.println(request.getParameter("id"));
+        System.out.println(request.getParameter("pool"));
         
     }
 
