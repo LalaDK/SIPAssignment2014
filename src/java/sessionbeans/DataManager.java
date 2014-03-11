@@ -9,7 +9,7 @@ import entities.Person;
 import entities.Round;
 import entities.Subject;
 import entities.Vote;
-import interfaces.IEntityManager;
+import interfaces.IDataManager;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +21,7 @@ import javax.persistence.PersistenceContext;
  * @author Mads
  */
 @Stateless
-public class EntityManager implements IEntityManager {
+public class DataManager implements IDataManager {
 
     @PersistenceContext(unitName = "SIPAssignment2014PU")
     private javax.persistence.EntityManager em;
@@ -56,13 +56,13 @@ public class EntityManager implements IEntityManager {
     public Collection<Person> getAllPersonsInRound(int round) {
         // Få fat i runder med givne rundenummer
         Collection<Round> rounds = em.createNamedQuery("Round.findByRoundno").setParameter("roundno", round).getResultList();
-        
+
         // Hent alle stemmer fra de runder
-        Collection<Vote> votes = new ArrayList<>();        
-        for(Round value : rounds) {
+        Collection<Vote> votes = new ArrayList<>();
+        for (Round value : rounds) {
             votes.addAll(value.getVoteCollection());
-        }        
-        
+        }
+
         // Hent person fra stemme. 
         Collection<Person> persons = new ArrayList<>();
         for (Vote vote : votes) {
@@ -73,13 +73,9 @@ public class EntityManager implements IEntityManager {
 
     @Override
     public void saveAllSubjects(Collection<Subject> subjects) {
-        for(Subject subject : subjects) {
-            em.persist(subject);
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     public void persist(Object object) {
         em.persist(object);
     }

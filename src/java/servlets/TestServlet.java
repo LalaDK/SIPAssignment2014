@@ -7,7 +7,7 @@ package servlets;
 
 import entities.Person;
 import entities.Subject;
-import interfaces.IEntityManager;
+import interfaces.IDataManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TestServlet extends HttpServlet {
 
     @EJB
-    private IEntityManager entityManager;
+    private IDataManager entityManager;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
