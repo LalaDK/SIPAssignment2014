@@ -6,9 +6,9 @@
 package interfaces;
 
 import entities.Person;
+import entities.Subject;
 import java.util.Collection;
 import java.util.HashMap;
-import javax.security.auth.Subject;
 
 /**
  *
