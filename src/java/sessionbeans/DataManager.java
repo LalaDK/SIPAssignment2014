@@ -101,7 +101,9 @@ public class DataManager implements IDataManager {
 
     @Override
     public void updatePoolOnSubject(int subjectId, char pool) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Subject s = em.createNamedQuery("Subject.findBySId", Subject.class).setParameter("SId", subjectId).getSingleResult();
+        s.setPool(pool);
+        persist(s);
     }
 
     @Override
