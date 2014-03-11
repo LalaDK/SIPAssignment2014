@@ -8,6 +8,7 @@ package interfaces;
 import entities.Subject;
 import entities.Person;
 import java.util.Collection;
+import java.util.HashMap;
 import javax.ejb.Local;
 
 @Local
@@ -28,4 +29,6 @@ public interface IDataManager {
     public Collection<Person> getAllPersons();
     
     public void updatePoolOnSubject(int subjectId, char pool);
+    
+    public HashMap<String, Integer> getSatisfaction();
 }

@@ -12,6 +12,7 @@ import entities.Vote;
 import interfaces.IDataManager;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceContext;
@@ -100,6 +101,11 @@ public class DataManager implements IDataManager {
 
     @Override
     public void updatePoolOnSubject(int subjectId, char pool) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public HashMap<String, Integer> getSatisfaction() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

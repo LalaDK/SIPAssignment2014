@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Thomas
  */
-@WebServlet(name = "UpdatePoolSelection", urlPatterns = {"/UpdatePoolSelection"})
-public class UpdatePoolSelection extends HttpServlet {
+@WebServlet(name = "SavePoolSelection", urlPatterns = {"/SavePoolSelection"})
+public class SavePoolSelection extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,11 +36,11 @@ public class UpdatePoolSelection extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         IDataManager data = DummyData.getInstance();
-        System.out.println("HERE!!");
-        
-        System.out.println(request.getParameter("id"));
-        System.out.println(request.getParameter("pool"));
-        
+        int id = Integer.parseInt(request.getParameter("id"));
+        char pool = request.getParameter("pool").charAt(0);
+        data.updatePoolOnSubject(id, pool);
+        System.out.println(pool);
+        System.out.println(id);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

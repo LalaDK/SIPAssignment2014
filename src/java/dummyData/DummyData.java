@@ -14,6 +14,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import utilities.Utilities;
 
 /**
  *
@@ -38,7 +40,7 @@ public class DummyData implements IDataManager {
         martinvote = new ArrayList<>();
         nicklasvote = new ArrayList<>();
         henrikote = new ArrayList<>();
-        
+
         //Subjects
         Subject Csharp = new Subject();
         Csharp.setSId(new BigDecimal(String.valueOf(1)));
@@ -244,13 +246,13 @@ public class DummyData implements IDataManager {
         nicklas.setVoteCollection(nicklasvote);
     }
 
-    public static DummyData getInstance(){
-        if(instance == null){
+    public static DummyData getInstance() {
+        if (instance == null) {
             instance = new DummyData();
         }
         return instance;
     }
-    
+
     @Override
     public Collection<Subject> getAllSubjects() {
         return subjects;
@@ -265,8 +267,8 @@ public class DummyData implements IDataManager {
     @Override
     public int getAmountOfVotesFromSubject(int round, int subjectId) {
         int result = 0;
-        for(Vote v : votes){
-            if((v.getRound().getRId() == new BigDecimal(String.valueOf(round)) && (v.getSubject().getSId() == new BigDecimal(String.valueOf(subjectId))))){
+        for (Vote v : votes) {
+            if ((v.getRound().getRId() == new BigDecimal(String.valueOf(round)) && (v.getSubject().getSId() == new BigDecimal(String.valueOf(subjectId))))) {
                 result++;
             }
         }
@@ -288,7 +290,7 @@ public class DummyData implements IDataManager {
     public Collection<Subject> getSubjectsFromPool(char pool) {
         Collection<Subject> tmp = new ArrayList<>();
         for (Subject s : subjects) {
-            if (s.getPool() == pool){
+            if (s.getPool() == pool) {
                 tmp.add(s);
             }
         }
@@ -302,12 +304,17 @@ public class DummyData implements IDataManager {
 
     @Override
     public void updatePoolOnSubject(int subjectId, char pool) {
-    for(Subject s : subjects){
-        if(s.getSId() == new BigDecimal(String.valueOf(subjectId))){
-            s.setPool(pool);
+        for (Subject s : subjects) {
+            if (s.getSId().intValue() == subjectId) {
+                s.setPool(pool);
+            }
         }
     }
-    }
     
+    public HashMap<String, Integer> getSatisfaction(){
+        ArrayList<Subject> stmp = new ArrayList<>(subjects);
+        ArrayList<Person> ptmp = new ArrayList<>(persons);
+        return Utilities.getSatisfaction(stmp, ptmp);
+    }
 
 }

@@ -14,29 +14,94 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <script>
-            var data = {"name": "abc", "address": "cde"};
-            $(document).ready(function() {
-                drawChart();
+            $(document).ready(function(data) {
+
             });
+
+            function getSatisfaction() {
+                $.ajax({
+                    url: "UpdateSatisfaction",
+                    cache: false,
+                    dataType: "json",
+                    success: drawChart
+                });
+            }
+
+            function testAjax(data) {
+                var options = {
+                    chart: {
+                        renderTo: 'chart-container',
+                        type: 'column'
+                    },
+                    series: [{
+                            name: 'Very Satisfied',
+                            data: [data["very_satisfied"]]
+                        }, {
+                            name: 'Satisfied',
+                            data: [data["satisfied"]]
+                        }, {
+                            name: 'Above Average',
+                            data: [data["above_average"]]
+                        }, {
+                            name: 'Below Average',
+                            data: [data["below_average"]]
+                        }, {
+                            name: 'Unsatisfied',
+                            data: [data["unsatisfied"]]
+                        }, {
+                            name: 'Very Unsatisfied',
+                            data: [data["very_unsatisfied"]]
+                        }]
+                };
+                options.series[0].data = data;
+
+            }
 
             function poolsChanged(pool) {
                 var subject = {id: pool.name, pool: pool.value};
-                alert(JSON.stringify(subject));
                 updatePool(subject);
+                getSatisfaction();
             }
 
             function updatePool(subject) {
                 $.ajax({
-                    url: "UpdatePoolSelection",
+                    url: "SavePoolSelection",
                     data: subject,
                     type: 'POST',
                     cache: false,
                     dataType: "json",
-                    success: drawChart()
                 });
             }
 
-            function drawChart() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            function drawChart(data) {
                 $('#chart-container').highcharts({
                     chart: {
                         type: 'column'
@@ -54,22 +119,22 @@
                     },
                     series: [{
                             name: 'Very Satisfied',
-                            data: [0]
+                            data: [data["very_satisfied"]]
                         }, {
                             name: 'Satisfied',
-                            data: [0]
+                            data: [data["satisfied"]]
                         }, {
                             name: 'Above Average',
-                            data: [0]
+                            data: [data["above_average"]]
                         }, {
                             name: 'Below Average',
-                            data: [0]
+                            data: [data["below_average"]]
                         }, {
                             name: 'Unsatisfied',
-                            data: [0]
+                            data: [data["unsatisfied"]]
                         }, {
                             name: 'Very Unsatisfied',
-                            data: [0]
+                            data: [data["very_unsatisfied"]]
                         }]
                 });
             }
