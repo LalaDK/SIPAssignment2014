@@ -111,7 +111,7 @@ public class DataManager implements IDataManager {
 
     @Override
     public void updatePoolOnSubject(int subjectId, char pool) {
-        Subject s = em.createNamedQuery("Subject.findBySId", Subject.class).setParameter("SId", subjectId).getSingleResult();
+        Subject s = em.createNamedQuery("Subject.findBySId", Subject.class).setParameter("sId", subjectId).getSingleResult();
         s.setPool(pool);
         persist(s);
     }
