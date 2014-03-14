@@ -11,6 +11,7 @@ import dummyData.DummyData;
 import interfaces.IDataManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,9 +24,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "UpdateSatisfaction", urlPatterns = {"/UpdateSatisfaction"})
 public class UpdateSatisfaction extends HttpServlet {
-
 //    @EJB
+//    private IDataManager dataManager;
     private IDataManager dataManager = DummyData.getInstance();
+
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,7 +36,6 @@ public class UpdateSatisfaction extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             out.println(gson.toJson(dataManager.getSatisfaction()));
         }
-        System.out.println(gson.toJson(dataManager.getSatisfaction()));
     }
 
     @Override

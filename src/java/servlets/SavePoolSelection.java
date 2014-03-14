@@ -39,8 +39,6 @@ public class SavePoolSelection extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         char pool = request.getParameter("pool").charAt(0);
         data.updatePoolOnSubject(id, pool);
-        System.out.println(pool);
-        System.out.println(id);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

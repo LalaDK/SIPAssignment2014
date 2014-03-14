@@ -62,22 +62,29 @@
                     },
                     series: [{
                             name: 'Very Satisfied',
-                            data: [data["very_satisfied"]]
+                            data: [data["very_satisfied"]],
+                            color: '#00FF00'
+                            
                         }, {
                             name: 'Satisfied',
-                            data: [data["satisfied"]]
+                            data: [data["satisfied"]],
+                            color: '#80FF00'
                         }, {
                             name: 'Above Average',
-                            data: [data["above_average"]]
+                            data: [data["above_average"]],
+                            color: '#FFFF00'
                         }, {
                             name: 'Below Average',
-                            data: [data["below_average"]]
+                            data: [data["below_average"]],
+                            color: '#FFBF00'
                         }, {
                             name: 'Unsatisfied',
-                            data: [data["unsatisfied"]]
+                            data: [data["unsatisfied"]],
+                            color: '#FF8000'
                         }, {
                             name: 'Very Unsatisfied',
-                            data: [data["very_unsatisfied"]]
+                            data: [data["very_unsatisfied"]],
+                            color: '#FF0000'
                         }]
                 });
             }
@@ -125,7 +132,8 @@
                         <td>${s.subjectname}</td>
 
                         <td>${fn:substring(s.description,0,65)}...</td>
-                        <td class="td-subject-votes">${s.voteCollection}</td>
+                        <c:set var="votes" value="${s.voteCollection}"></c:set>
+                        <td class="td-subject-votes">${fn:length(votes)}</td>
                         <td class="td-subject-pool">A:<input type="radio" onchange="poolsChanged(this)" name="${s.SId}" value="a" <c:if test="${s.pool == 'a'}">CHECKED</c:if>></td>
                         <td class="td-subject-pool">B:<input type="radio" onchange="poolsChanged(this)" name="${s.SId}" value="b" <c:if test="${s.pool == 'b'}">CHECKED</c:if>></td>
                         <td class="td-subject-pool">C:<input type="radio" onchange="poolsChanged(this)" name="${s.SId}" value="c" <c:if test="${s.pool == 'c'}">CHECKED</c:if>></td>

@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
-import dummyData.DummyData;
+import entities.Subject;
 import interfaces.IDataManager;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,20 +16,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sessionbeans.DataManager;
 
 @WebServlet(name = "AdminPoolSelection", urlPatterns = {"/AdminPoolSelection"})
 public class AdminPoolSelection extends HttpServlet {
-//    @EJB
-    private IDataManager dataManager = DummyData.getInstance();
+    @EJB
+    private IDataManager dataManager;
 
+//    private IDataManager dataManager = DummyData.getInstance();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        Collection<Subject> test = dataManager.getAllSubjectsFromRound(2);
         request.setAttribute("subjects", dataManager.getAllSubjectsFromRound(2));
-        
-                RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/AdminPoolSelection.jsp");
+
+        RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/AdminPoolSelection.jsp");
         dis.forward(request, response);
     }
 
