@@ -7,6 +7,7 @@ package interfaces;
 
 import entities.Subject;
 import entities.Person;
+import entities.Vote;
 import java.util.Collection;
 import java.util.HashMap;
 import javax.ejb.Local;
@@ -31,4 +32,8 @@ public interface IDataManager {
     public void updatePoolOnSubject(int subjectId, char pool);
     
     public HashMap<String, Integer> getSatisfaction();
+    
+    public Collection<Person> getAllStudents();
+    
+    public void saveVote(Vote vote);
 }

@@ -311,10 +311,21 @@ public class DummyData implements IDataManager {
         }
     }
     
+    @Override
     public HashMap<String, Integer> getSatisfaction(){
         ArrayList<Subject> stmp = new ArrayList<>(subjects);
         ArrayList<Person> ptmp = new ArrayList<>(persons);
         return Utilities.getSatisfaction(stmp, ptmp);
+    }
+
+    @Override
+    public Collection<Person> getAllStudents() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void saveVote(Vote vote) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
