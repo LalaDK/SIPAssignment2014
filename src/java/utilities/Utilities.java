@@ -5,12 +5,13 @@ import entities.Person;
 import entities.Subject;
 import entities.Vote;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 
 public class Utilities {
 
-    public static HashMap<String, Integer> getSatisfaction(ArrayList<Subject> subjects, ArrayList<Person> persons) {
+    public static HashMap<String, Integer> getSatisfaction(Collection<Subject> subjects, Collection<Person> persons) {
         HashMap<String, Integer> result = getLevelsOfSatisfaction();
         ArrayList<Subject> poolA = new ArrayList<>();
         ArrayList<Subject> poolB = new ArrayList<>();
@@ -113,7 +114,7 @@ public class Utilities {
         }
     }
 
-    private static void sortSubjectsIntoPools(ArrayList<Subject> subjects, ArrayList<Subject> poolA, ArrayList<Subject> poolB) {
+    private static void sortSubjectsIntoPools(Collection<Subject> subjects, Collection<Subject> poolA, Collection<Subject> poolB) {
         for (Subject s : subjects) {
             if (s.getPool() == 'a') {
                 poolA.add(s);

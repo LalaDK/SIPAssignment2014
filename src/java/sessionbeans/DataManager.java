@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -91,7 +92,16 @@ public class DataManager implements IDataManager {
 //    }
     @Override
     public Collection<Subject> getSubjectsFromPool(char pool) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query q = em.createNamedQuery("Subject.findByPool", Subject.class);
+        q.setParameter("pool", pool);
+        return q.getResultList();
+    }
+
+    @Override
+    public Collection<Person> getAllStudents() {
+        Query q = em.createNamedQuery("Person.findByPosition", Person.class);
+        q.setParameter("position", 'S');
+        return q.getResultList();
     }
 
     @Override
@@ -108,16 +118,13 @@ public class DataManager implements IDataManager {
 
     @Override
     public HashMap<String, Integer> getSatisfaction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Collection<Person> getAllStudents() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Collection<Person> persons = getAllPersonsInRound(2);
+        Collection<Subject> subjects = getAllSubjects();
+        return utilities.Utilities.getSatisfaction(subjects, persons);
     }
 
     @Override
     public void saveVote(Vote vote) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        persist(vote);
     }
 }
