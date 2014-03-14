@@ -68,7 +68,7 @@
                         }, {
                             name: 'Satisfied',
                             data: [data["satisfied"]],
-                            color: '#80FF00'
+                            color: '#BFFF00'
                         }, {
                             name: 'Above Average',
                             data: [data["above_average"]],
