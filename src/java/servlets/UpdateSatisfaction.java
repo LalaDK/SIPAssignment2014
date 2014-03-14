@@ -24,9 +24,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "UpdateSatisfaction", urlPatterns = {"/UpdateSatisfaction"})
 public class UpdateSatisfaction extends HttpServlet {
-//    @EJB
-//    private IDataManager dataManager;
-    private IDataManager dataManager = DummyData.getInstance();
+    @EJB
+    private IDataManager dataManager;
+//    private IDataManager dataManager = DummyData.getInstance();
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
