@@ -132,5 +132,9 @@ public class Vote implements Serializable {
     public String toString() {
         return "entities.Vote[ votePK=" + votePK + " ]";
     }
+
+    public void getMadsAwesomeFunction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
