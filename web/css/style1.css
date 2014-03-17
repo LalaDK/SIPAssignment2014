@@ -22,7 +22,18 @@ body {
     width: 40px;
 }
 
+.td-subject-name {
+    width: 275px;
+}
+
+.td-subject-teacher {
+    width: 200px;
+}
 
 .td-subject-votes {
     width: 70px;
+}
+
+.td-vote-priority {
+    width: 50px;
 }

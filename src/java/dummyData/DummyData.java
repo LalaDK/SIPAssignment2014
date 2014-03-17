@@ -58,37 +58,37 @@ public class DummyData implements IDataManager {
         Android.setSId(new BigDecimal(String.valueOf(3)));
         Android.setSubjectname("Android");
         Android.setDescription("Test Description");
-        Android.setPool('c');
+        Android.setPool('a');
 
         Subject Python = new Subject();
         Python.setSId(new BigDecimal(String.valueOf(4)));
         Python.setSubjectname("Python");
         Python.setDescription("Test Description");
-        Python.setPool('c');
+        Python.setPool('b');
 
         Subject MordernFunc = new Subject();
         MordernFunc.setSId(new BigDecimal(String.valueOf(5)));
         MordernFunc.setSubjectname("Mordern Functional Programming");
         MordernFunc.setDescription("Test Description");
-        MordernFunc.setPool('c');
+        MordernFunc.setPool('a');
 
         Subject Databases = new Subject();
         Databases.setSId(new BigDecimal(String.valueOf(6)));
         Databases.setSubjectname("Databases");
         Databases.setDescription("Test Description");
-        Databases.setPool('c');
+        Databases.setPool('b');
 
         Subject TDD = new Subject();
         TDD.setSId(new BigDecimal(String.valueOf(7)));
         TDD.setSubjectname("Testdriven Developement");
         TDD.setDescription("Test Description");
-        TDD.setPool('c');
+        TDD.setPool('a');
 
         Subject Games = new Subject();
         Games.setSId(new BigDecimal(String.valueOf(8)));
         Games.setSubjectname("Games");
         Games.setDescription("Test Description");
-        Games.setPool('c');
+        Games.setPool('b');
 
         subjects.add(Csharp);
         subjects.add(Android);
@@ -101,15 +101,19 @@ public class DummyData implements IDataManager {
 
         //Persons
         Person bjarke = new Person();
+        bjarke.setName("Bjarke");
         bjarke.setPId(new BigDecimal(String.valueOf(1)));
 
         Person martin = new Person();
+        martin.setName("Martin");
         martin.setPId(new BigDecimal(String.valueOf(2)));
 
         Person henrik = new Person();
+        henrik.setName("Henrik");
         henrik.setPId(new BigDecimal(String.valueOf(3)));
 
         Person nicklas = new Person();
+        nicklas.setName("Nicklas");
         nicklas.setPId(new BigDecimal(String.valueOf(4)));
 
         persons.add(bjarke);
@@ -320,7 +324,7 @@ public class DummyData implements IDataManager {
 
     @Override
     public Collection<Person> getAllStudents() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    return persons;
     }
 
     @Override
