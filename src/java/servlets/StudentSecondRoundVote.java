@@ -32,7 +32,6 @@ public class StudentSecondRoundVote extends HttpServlet {
             BigInteger subjectIdSecondPriorityPoolA = new BigInteger(request.getParameter("priority2poola"));
             BigInteger subjectIdFirstPriorityPoolB = new BigInteger(request.getParameter("priority1poolb"));
             BigInteger subjectIdSecondPriorityPoolB = new BigInteger(request.getParameter("priority2poolb"));
-            System.out.println(request.getParameter("studentid"));
             BigInteger studentId = new BigInteger(request.getParameter("studentid"));
 
             Vote firstPriorityPoolA = new Vote(new VotePK(studentId, round, subjectIdFirstPriorityPoolA), new BigInteger("1"));
