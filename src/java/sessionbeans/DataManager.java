@@ -10,6 +10,7 @@ import entities.Round;
 import entities.Subject;
 import entities.Vote;
 import interfaces.IDataManager;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -125,13 +126,17 @@ public class DataManager implements IDataManager {
 
     @Override
     public void saveVote(Vote vote) {
+        persist(vote);
+    }
+
+    @Override
+    public void removeVotes(BigInteger pId, BigInteger rId) {
         Query q = em.createNamedQuery("Vote.findByPIdAndRId");
-        q.setParameter("pId", vote.getVotePK().getPId());
-        q.setParameter("rId", vote.getVotePK().getRId());
+        q.setParameter("pId", pId);
+        q.setParameter("rId", rId);
         Collection<Vote> result = q.getResultList();
-        for(Vote v : result) {
+        for (Vote v : result) {
             em.remove(v);
         }
-        persist(vote);
     }
 }

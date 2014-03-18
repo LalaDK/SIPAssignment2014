@@ -8,6 +8,7 @@ package interfaces;
 import entities.Subject;
 import entities.Person;
 import entities.Vote;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashMap;
 import javax.ejb.Local;
@@ -36,4 +37,6 @@ public interface IDataManager {
     public Collection<Person> getAllStudents();
     
     public void saveVote(Vote vote);
+    
+    public void removeVotes(BigInteger pId, BigInteger rId);
 }

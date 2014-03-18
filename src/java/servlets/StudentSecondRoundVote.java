@@ -4,7 +4,6 @@ import entities.Vote;
 import entities.VotePK;
 import interfaces.IDataManager;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigInteger;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -40,6 +39,7 @@ public class StudentSecondRoundVote extends HttpServlet {
             Vote secondPriorityPoolA = new Vote(new VotePK(studentId, round, subjectIdSecondPriorityPoolA), new BigInteger("2"));
             Vote firstPriorityPoolB = new Vote(new VotePK(studentId, round, subjectIdFirstPriorityPoolB), new BigInteger("1"));
             Vote secondPriorityPoolB = new Vote(new VotePK(studentId, round, subjectIdSecondPriorityPoolB), new BigInteger("2"));
+            dataManager.removeVotes(studentId, round);            
             dataManager.saveVote(firstPriorityPoolA);
             dataManager.saveVote(secondPriorityPoolA);
             dataManager.saveVote(firstPriorityPoolB);
