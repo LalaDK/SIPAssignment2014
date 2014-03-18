@@ -3,11 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
+import entities.Vote;
+import entities.VotePK;
+import interfaces.IDataManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,29 +26,33 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "StudentFirstRoundSaveVote", urlPatterns = {"/StudentFirstRoundSaveVote"})
 public class StudentFirstRoundSaveVote extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @EJB
+    private IDataManager dataManager;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet StudentFirstRoundSaveVote</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet StudentFirstRoundSaveVote at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        BigInteger round = new BigInteger("1");
+        try {
+            BigInteger studentId = new BigInteger(request.getParameter("studentid"));
+            String[] firstpri = request.getParameterValues("firstpriority");
+            String[] secondpri = request.getParameterValues("secondpriority");
+
+            dataManager.removeVotes(studentId, round);
+            for(String s : firstpri){
+                dataManager.saveVote(new Vote(new VotePK(studentId, round, new BigInteger(s)), new BigInteger("1")));
+            }
+       
+            for(String s : secondpri){
+                dataManager.saveVote(new Vote(new VotePK(studentId, round, new BigInteger(s)), new BigInteger("2")));
+            }
+            
+            RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/StudentVoteAccepted.jsp");
+            dis.forward(request, response);
+        } catch (Exception e) {
+            System.out.println("Getting data" + e.getStackTrace());
+            RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/StudentVoteNotAccepted.jsp");
+            dis.forward(request, response);
         }
     }
 

@@ -10,6 +10,7 @@
         <script>
             $(document).ready(function() {
                 $("#subjects").hide();
+                $("#errorsubjectselection").hide();
 
                 $('#selectStudent').click(function() {
                     $("#subjects").toggle("slow");
@@ -17,19 +18,42 @@
                     $("#studentid").prop("disabled", true);
                 });
 
-
-                $("input[type=checkbox][name=firstpriority]").click(function() {
-                    var bol = $("input[type=checkbox][name=firstpriority]:checked").length >= 2;
-                    $("input[type=checkbox][name=firstpriority]").not(":checked").attr("disabled", bol);
+                $(':checkbox').change(function() {
+                    $(this).parent().siblings().children(':checkbox').attr('checked', false);
+                    disableFirstCheckboxes();
+                    disableSecondCheckboxes();
                 });
-                $("input[type=checkbox][name=secondpriority]").click(function() {
-                    var bol = $("input[type=checkbox][name=secondpriority]:checked").length >= 2;
-                    $("input[type=checkbox][name=secondpriority]").not(":checked").attr("disabled", bol);
+
+                $("input[type=checkbox][name=firstpriority]").change(function() {
+                    disableFirstCheckboxes();
+                });
+                $("input[type=checkbox][name=secondpriority]").change(function() {
+                    disableSecondCheckboxes();
                 });
             });
-            
-            function checkboxes(){
-                
+
+            function disableFirstCheckboxes() {
+                var bol = $("input[type=checkbox][name=firstpriority]:checked").length >= 2;
+                $("input[type=checkbox][name=firstpriority]").not(":checked").attr("disabled", bol);
+            }
+
+            function disableSecondCheckboxes() {
+                var bol = $("input[type=checkbox][name=secondpriority]:checked").length >= 2;
+                $("input[type=checkbox][name=secondpriority]").not(":checked").attr("disabled", bol);
+            }
+
+            function checkboxes() {
+                if ($("input[type=checkbox][name=firstpriority]:checked").length < 2) {
+                    $("#errorsubjectselection").toggle("slow");
+                    return false;
+                }
+                if ($("input[type=checkbox][name=secondpriority]:checked").length < 2) {
+                    $("#errorsubjectselection").toggle("slow");
+                    return false;
+                }
+                $("#selectStudent").prop("disabled", false);
+                $("#studentid").prop("disabled", false);
+                return true;
             }
         </script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -54,12 +78,12 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="/SIPAssignment2014/StudentSelectionFirstRound">First Round</a></li>
+                            <li class="active"><a href="StudentSelectionFirstRound">First Round</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
-            <form name="studenSecondRoundVote" action="StudentFirstRoundVote" onsubmit="">
+            <form name="studenFirstRoundVote" action="StudentFirstRoundSaveVote" onsubmit="return checkboxes()">
                 <h3>Select student:</h3>
                 <select name="studentid" id="studentid" class="dropdown-students">
                     <c:forEach var="student" items="${students}">
@@ -70,11 +94,11 @@
                 <br />
                 <div id="subjects">
                     <h3>Subjects:</h3>
+                    <div id="errorsubjectselection" class="alert alert-danger">You have to select 2 first priorities and 2 second priorities</div>
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Teacher</th>
                             <th>Description</th>
                             <th>1 P.</th>
                             <th>2 P.</th>
@@ -83,10 +107,9 @@
                             <tr>
                                 <td class="td-subject-id">${s.SId}</td>
                                 <td>${s.subjectname}</td>
-                                <td></td>
                                 <td>${fn:substring(s.description,0,65)}...</td>
-                                <td><input type="checkbox" id="firstpriority" name="firstpriority"></td>
-                                <td><input type="checkbox" id="secondpriority" name="secondpriority"></td>
+                                <td><input type="checkbox" id="firstpriority" name="firstpriority" value="${s.SId}"></td>
+                                <td><input type="checkbox" id="secondpriority" name="secondpriority" value="${s.SId}"></td>
                             </tr>
                         </c:forEach>
                     </table>
