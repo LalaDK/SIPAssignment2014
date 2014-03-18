@@ -1,4 +1,3 @@
-
 package utilities;
 
 import entities.Person;
@@ -7,7 +6,6 @@ import entities.Vote;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-
 
 public class Utilities {
 
@@ -81,7 +79,7 @@ public class Utilities {
         return result;
     }
 
-    private static void prioritizeVotes(Person p, ArrayList<Vote> firstPriority, 
+    private static void prioritizeVotes(Person p, ArrayList<Vote> firstPriority,
             ArrayList<Vote> secondPriority) {
         for (Vote v : p.getVoteCollection()) {
             if (v.getPriority().intValue() == 1) {
@@ -93,10 +91,10 @@ public class Utilities {
     }
 
     private static void decideLevelOfSatisfaction(
-            boolean firstPriorityFullfilledPoolA, 
-            boolean firstPriorityFullfilledPoolB, 
-            HashMap<String, Integer> result, 
-            boolean secondPriorityFullfilledPoolB, 
+            boolean firstPriorityFullfilledPoolA,
+            boolean firstPriorityFullfilledPoolB,
+            HashMap<String, Integer> result,
+            boolean secondPriorityFullfilledPoolB,
             boolean secondPriorityFullfilledPoolA) {
         if (firstPriorityFullfilledPoolA && firstPriorityFullfilledPoolB) {
             result.put("very_satisfied", result.get("very_satisfied") + 1);
