@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,19 +33,23 @@ public class StudentSecondRoundVote extends HttpServlet {
             BigInteger subjectIdSecondPriorityPoolA = new BigInteger(request.getParameter("priority2poola"));
             BigInteger subjectIdFirstPriorityPoolB = new BigInteger(request.getParameter("priority1poolb"));
             BigInteger subjectIdSecondPriorityPoolB = new BigInteger(request.getParameter("priority2poolb"));
-            BigInteger studentId = new BigInteger(request.getParameter("studenid"));
-            
-            Vote firstPriorityPoolA = new Vote(new VotePK(studentId, subjectIdFirstPriorityPoolA, round),new BigInteger("1"));
-            Vote secondPriorityPoolA = new Vote(new VotePK(studentId, subjectIdSecondPriorityPoolA, round),new BigInteger("2"));
-            Vote firstPriorityPoolB = new Vote(new VotePK(studentId, subjectIdFirstPriorityPoolB, round),new BigInteger("1"));            
-            Vote secondPriorityPoolB = new Vote(new VotePK(studentId, subjectIdSecondPriorityPoolB, round),new BigInteger("2"));
+            System.out.println(request.getParameter("studentid"));
+            BigInteger studentId = new BigInteger(request.getParameter("studentid"));
 
+            Vote firstPriorityPoolA = new Vote(new VotePK(studentId, subjectIdFirstPriorityPoolA, round), new BigInteger("1"));
+            Vote secondPriorityPoolA = new Vote(new VotePK(studentId, subjectIdSecondPriorityPoolA, round), new BigInteger("2"));
+            Vote firstPriorityPoolB = new Vote(new VotePK(studentId, subjectIdFirstPriorityPoolB, round), new BigInteger("1"));
+            Vote secondPriorityPoolB = new Vote(new VotePK(studentId, subjectIdSecondPriorityPoolB, round), new BigInteger("2"));
             dataManager.saveVote(firstPriorityPoolA);
             dataManager.saveVote(secondPriorityPoolA);
             dataManager.saveVote(firstPriorityPoolB);
             dataManager.saveVote(secondPriorityPoolB);
+            RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/StudentVoteAccepted.jsp");
+            dis.forward(request, response);
         } catch (Exception e) {
             System.out.println("Getting data" + e.getStackTrace());
+            RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/StudentVoteNotAccepted.jsp");
+            dis.forward(request, response);
         }
 
     }

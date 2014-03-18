@@ -6,11 +6,11 @@
 
 package servlets;
 
-import dummyData.DummyData;
 import entities.Person;
 import entities.Subject;
 import interfaces.IDataManager;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -20,23 +20,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet(name = "StudentSelectionSecondRound", urlPatterns = {"/StudentSelectionSecondRound"})
-public class StudentSelectionSecondRound extends HttpServlet {
+/**
+ *
+ * @author Thomas
+ */
+@WebServlet(name = "StudentSelectionFirstRound", urlPatterns = {"/StudentSelectionFirstRound"})
+public class StudentSelectionFirstRound extends HttpServlet {
     @EJB
     private IDataManager dataManager;
-//    private IDataManager dataManager = DummyData.getInstance();
-    
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Collection<Subject> poola = dataManager.getSubjectsFromPool('a');
-        Collection<Subject> poolb = dataManager.getSubjectsFromPool('b');
+        Collection<Subject> subjects = dataManager.getAllSubjects();
         Collection<Person> students = dataManager.getAllStudents();
-        request.setAttribute("asubjects", poola);
-        request.setAttribute("bsubjects", poolb);
+        request.setAttribute("subjects", subjects);
         request.setAttribute("students", students);
-                RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/StudentSelectionSecondRound.jsp");
+                RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/StudentSelectionFirstRound.jsp");
         dis.forward(request, response);
     }
 

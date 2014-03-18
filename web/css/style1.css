@@ -18,6 +18,11 @@ body {
     width: 50px;
 }
 
+.dropdown-students {
+    width: 400px;
+    height: 35px;
+}
+
 .td-subject-id {
     width: 40px;
 }

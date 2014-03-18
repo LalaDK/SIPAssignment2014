@@ -12,11 +12,17 @@
                 $(':radio').click(function() {
                     $(this).parent().siblings().children(':radio').attr('checked', false);
                 });
+
+                $('#selectStudent').click(function() {
+                    $("#pools").toggle("slow");
+                    $("#selectStudent").prop("disabled", true);
+                    $("#studentid").prop("disabled", true);
+                });
+
                 $("#errorPoolA").hide();
                 $("#errorPoolB").hide();
                 $("#success").hide();
-
-
+                $("#pools").hide();
             });
 
             function checkRadiobuttons() {
@@ -41,9 +47,10 @@
                 else {
                     $("#errorPoolA").hide();
                     $("#errorPoolB").hide();
-                    $("#success").toggle("slow");
-                    //Do AJAX call saving student votes!
-                    return false;
+                    $("#pools").toggle("slow");
+                    $("#selectStudent").prop("disabled", false);
+                    $("#studentid").prop("disabled", false);
+                    return true;
                 }
             }
         </script>
@@ -77,56 +84,59 @@
             <div id="success" class="alert alert-success">Votes saved successfully!</div>
             <form name="studenSecondRoundVote" action="StudentSecondRoundVote" onsubmit="return checkRadiobuttons()">
                 <h3>Select student:</h3>
-                <select name="studenid">
+                <select name="studentid" class="dropdown-students">
                     <c:forEach var="student" items="${students}">
                         <option value="${student.PId}">${student.name}</option>
                     </c:forEach>
                 </select>
+                <input value="Select student" type="button" id="selectStudent" class="btn btn-primary"/>
                 <br />
-                <h3>Pool A:</h3>
-                <div id="errorPoolA" class="alert alert-danger">Please choose a first and a second priority in pool A!</div>
-                <table class="table table-striped table-bordered">
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>1 P.</th>
-                        <th>2 P.</th>
-                    </tr>
-                    <c:forEach var="s" items="${asubjects}">
+                <div id="pools">
+                    <h3>Pool A:</h3>
+                    <div id="errorPoolA" class="alert alert-danger">Please choose a first and a second priority in pool A!</div>
+                    <table class="table table-striped table-bordered">
                         <tr>
-                            <td class="td-subject-id">${s.SId}</td>
-                            <td class="td-subject-name">${s.subjectname}</td>
-                            <td>${fn:substring(s.description,0,65)}...</td>
-                            <td class="td-vote-priority"><input type="radio" name="priority1poola" value="${s.SId}"></td>
-                            <td class="td-vote-priority"><input type="radio" name="priority2poola" value="${s.SId}"></td>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>1 P.</th>
+                            <th>2 P.</th>
                         </tr>
-                    </c:forEach>
-                </table>
-                <br/>
-                <h3>Pool B:</h3>
-                <div id="errorPoolB" class="alert alert-danger">Please choose a first and a second priority in pool B!</div>
-                <table class="table table-striped table-bordered">
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>1 P.</th>
-                        <th>2 P.</th>
-                    </tr>
-                    <c:forEach var="s" items="${bsubjects}">
+                        <c:forEach var="s" items="${asubjects}">
+                            <tr>
+                                <td class="td-subject-id">${s.SId}</td>
+                                <td class="td-subject-name">${s.subjectname}</td>
+                                <td>${fn:substring(s.description,0,65)}...</td>
+                                <td class="td-vote-priority"><input type="radio" name="priority1poola" value="${s.SId}"></td>
+                                <td class="td-vote-priority"><input type="radio" name="priority2poola" value="${s.SId}"></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                    <br/>
+                    <h3>Pool B:</h3>
+                    <div id="errorPoolB" class="alert alert-danger">Please choose a first and a second priority in pool B!</div>
+                    <table class="table table-striped table-bordered">
                         <tr>
-                            <td class="td-subject-id">${s.SId}</td>
-                            <td class="td-subject-name">${s.subjectname}</td>
-                 
-                            <td>${fn:substring(s.description,0,65)}...</td>
-                            <td class="td-vote-priority"><input type="radio" name="priority1poolb" value="${s.SId}"></td>
-                            <td class="td-vote-priority"><input type="radio" name="priority2poolb" value="${s.SId}"></td>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>1 P.</th>
+                            <th>2 P.</th>
                         </tr>
-                    </c:forEach>
-                </table>
-                <input type="submit" value="Submit" class="btn btn-primary">
-            </form>
+                        <c:forEach var="s" items="${bsubjects}">
+                            <tr>
+                                <td class="td-subject-id">${s.SId}</td>
+                                <td class="td-subject-name">${s.subjectname}</td>
+
+                                <td>${fn:substring(s.description,0,65)}...</td>
+                                <td class="td-vote-priority"><input type="radio" name="priority1poolb" value="${s.SId}"></td>
+                                <td class="td-vote-priority"><input type="radio" name="priority2poolb" value="${s.SId}"></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                    <input id="submitVotes" type="submit" value="Submit" class="btn btn-primary">
+                    </form>
+                </div>
         </div>
     </body>
 </html>

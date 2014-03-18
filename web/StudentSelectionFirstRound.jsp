@@ -8,7 +8,13 @@
         <script src="js/jquery-1.11.0.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
-
+            $("#bla :checkbox").click(function() {
+                if ($("#bla :checkbox:checked").length >= 4) {
+                    $("#bla :checkbox:not(:checked)").attr("disabled", "disabled");
+                } else {
+                    $("#bla :checkbox").attr("disabled", "");
+                }
+            });
         </script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style1.css" rel="stylesheet">
@@ -37,27 +43,37 @@
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
-            <!--TODO!! Iterate subjects and pools-->
-            <table class="table table-striped table-bordered">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Teacher</th>
-                    <th>Description</th>
-                    <th>1 P.</th>
-                    <th>2 P.</th>
-                </tr>
-                <c:forEach var="s" items="${subjects}">
-                    <tr>
-                        <td class="td-subject-id">${s.SId}</td>
-                        <td>${s.subjectname}</td>
-                        <td></td>
-                        <td>${fn:substring(s.description,0,65)}...</td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                        </tr>
+            <h3>Select student:</h3>
+            <select name="studentid" class="dropdown-students">
+                <c:forEach var="student" items="${students}">
+                    <option value="${student.PId}">${student.name}</option>
                 </c:forEach>
-            </table>
+            </select>
+            <input value="Select student" type="button" id="selectStudent" class="btn btn-primary"/>
+            <br />
+            <h3>Pool A:</h3>
+            <div id="subjects">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Teacher</th>
+                        <th>Description</th>
+                        <th>1 P.</th>
+                        <th>2 P.</th>
+                    </tr>
+                    <c:forEach var="s" items="${subjects}">
+                        <tr>
+                            <td class="td-subject-id">${s.SId}</td>
+                            <td>${s.subjectname}</td>
+                            <td></td>
+                            <td>${fn:substring(s.description,0,65)}...</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
         </div>
     </body>
 </html>
