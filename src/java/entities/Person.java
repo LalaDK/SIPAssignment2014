@@ -151,5 +151,4 @@ public class Person implements Serializable {
     public String toString() {
         return "entities.Person[ pId=" + pId + " ]";
     }
-    
 }

@@ -125,6 +125,13 @@ public class DataManager implements IDataManager {
 
     @Override
     public void saveVote(Vote vote) {
+        Query q = em.createNamedQuery("Vote.findByPIdAndRId");
+        q.setParameter("pId", vote.getVotePK().getPId());
+        q.setParameter("rId", vote.getVotePK().getRId());
+        Collection<Vote> result = q.getResultList();
+        for(Vote v : result) {
+            em.remove(v);
+        }
         persist(vote);
     }
 }
