@@ -23,7 +23,7 @@ import utilities.Utilities;
  */
 public class DummyData implements IDataManager {
 
-    public static DummyData instance;
+    private static DummyData instance;
     Collection<Subject> subjects;
     Collection<Person> persons;
     Collection<Vote> votes;
@@ -314,9 +314,9 @@ public class DummyData implements IDataManager {
             }
         }
     }
-    
+
     @Override
-    public HashMap<String, Integer> getSatisfaction(){
+    public HashMap<String, Integer> getSatisfaction() {
         ArrayList<Subject> stmp = new ArrayList<>(subjects);
         ArrayList<Person> ptmp = new ArrayList<>(persons);
         return Utilities.getSatisfaction(stmp, ptmp);
@@ -324,7 +324,7 @@ public class DummyData implements IDataManager {
 
     @Override
     public Collection<Person> getAllStudents() {
-    return persons;
+        return persons;
     }
 
     @Override
@@ -337,4 +337,7 @@ public class DummyData implements IDataManager {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void killInstance() {
+        instance = null;
+    }
 }

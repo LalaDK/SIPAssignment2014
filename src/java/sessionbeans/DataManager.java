@@ -59,37 +59,16 @@ public class DataManager implements IDataManager {
     public Collection<Person> getAllPersonsInRound(int round) {
         Query q = em.createNamedQuery("Person.findAll", Person.class);
         Collection<Person> persons = q.getResultList();
-
-        Collection<Person> sortedPersons = new ArrayList<>();
-
-        boolean found = false;
+        Collection<Person> result = new ArrayList<>();
         for (Person p : persons) {
             for (Vote v : p.getVoteCollection()) {
                 if (v.getRound().getRoundno().intValue() == round) {
-                    sortedPersons.add(p);
+                    result.add(p);
                     break;
                 }
             }
         }
-        System.out.println("Sorted persons size: " + sortedPersons.size());
-        return sortedPersons;
-
-//        // Få fat i runder med givne rundenummer
-//        Collection<Round> rounds = em.createNamedQuery("Round.findByRoundno").setParameter("roundno", round).getResultList();
-//
-//        // Hent alle stemmer fra de runder
-//        Collection<Vote> votes = new ArrayList<>();
-//        for (Round value : rounds) {
-//            votes.addAll(value.getVoteCollection());
-//        }
-//
-//        // Hent person fra stemme. 
-//        Collection<Person> persons = new ArrayList<>();
-//        for (Vote vote : votes) {
-//
-//            persons.add(vote.getPerson());
-//        }
-//        return persons;
+        return result;
     }
 
     @Override
@@ -147,6 +126,7 @@ public class DataManager implements IDataManager {
     }
 
     @Override
+    
     public void removeVotes(BigInteger pId, BigInteger rId) {
         Query q = em.createNamedQuery("Vote.findByPIdAndRId");
         q.setParameter("pId", pId);

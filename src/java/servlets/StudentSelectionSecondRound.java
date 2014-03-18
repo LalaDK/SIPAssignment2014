@@ -32,7 +32,7 @@ public class StudentSelectionSecondRound extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Collection<Subject> poola = dataManager.getSubjectsFromPool('a');
         Collection<Subject> poolb = dataManager.getSubjectsFromPool('b');
-        Collection<Person> students = dataManager.getAllStudents();
+        Collection<Person> students = dataManager.getAllPersonsInRound(2);
         request.setAttribute("asubjects", poola);
         request.setAttribute("bsubjects", poolb);
         request.setAttribute("students", students);
