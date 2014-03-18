@@ -27,7 +27,6 @@ public class AdminPoolSelection extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Collection<Subject> test = dataManager.getAllSubjectsFromRound(2);
         request.setAttribute("subjects", dataManager.getAllSubjectsFromRound(2));
 
         RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/AdminPoolSelection.jsp");
