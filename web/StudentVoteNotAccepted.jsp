@@ -12,11 +12,11 @@
         </script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style1.css" rel="stylesheet">
-        <title>Second round</title>
+        <title>Vote Registration</title>
     </head>
     <body>
         <div>
-            <h1>Second Round Subject Election</h1>
+            <h1>Vote not registered</h1>
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -32,7 +32,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="/SIPAssignment2014/StudentSelectionFirstRound">Second Round</a></li>
+                            <li class="active"><a href="#">Vote Registration</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
