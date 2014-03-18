@@ -34,13 +34,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "PERSON")
 @XmlRootElement
 @NamedQueries({
+    
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
     @NamedQuery(name = "Person.findByPId", query = "SELECT p FROM Person p WHERE p.pId = :pId"),
     @NamedQuery(name = "Person.findByName", query = "SELECT p FROM Person p WHERE p.name = :name"),
     @NamedQuery(name = "Person.findByAddress", query = "SELECT p FROM Person p WHERE p.address = :address"),
     @NamedQuery(name = "Person.findByPosition", query = "SELECT p FROM Person p WHERE p.position = :position")})
 public class Person implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L; 
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)

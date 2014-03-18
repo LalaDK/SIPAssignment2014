@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sessionbeans.DataManager;
 
 /**
  *
@@ -27,8 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
 public class TestServlet extends HttpServlet {
 
-//    @EJB
-    private IDataManager entityManager = DummyData.getInstance();
+    @EJB
+    private IDataManager entityManager;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

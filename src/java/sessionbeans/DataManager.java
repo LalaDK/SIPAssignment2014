@@ -57,22 +57,39 @@ public class DataManager implements IDataManager {
 
     @Override
     public Collection<Person> getAllPersonsInRound(int round) {
-        // Få fat i runder med givne rundenummer
-        Collection<Round> rounds = em.createNamedQuery("Round.findByRoundno").setParameter("roundno", round).getResultList();
+        Query q = em.createNamedQuery("Person.findAll", Person.class);
+        Collection<Person> persons = q.getResultList();
 
-        // Hent alle stemmer fra de runder
-        Collection<Vote> votes = new ArrayList<>();
-        for (Round value : rounds) {
-            votes.addAll(value.getVoteCollection());
+        Collection<Person> sortedPersons = new ArrayList<>();
+
+        boolean found = false;
+        for (Person p : persons) {
+            for (Vote v : p.getVoteCollection()) {
+                if (v.getRound().getRoundno().intValue() == round) {
+                    sortedPersons.add(p);
+                    break;
+                }
+            }
         }
+        System.out.println("Sorted persons size: " + sortedPersons.size());
+        return sortedPersons;
 
-        // Hent person fra stemme. 
-        Collection<Person> persons = new ArrayList<>();
-        for (Vote vote : votes) {
-
-            persons.add(vote.getPerson());
-        }
-        return persons;
+//        // Få fat i runder med givne rundenummer
+//        Collection<Round> rounds = em.createNamedQuery("Round.findByRoundno").setParameter("roundno", round).getResultList();
+//
+//        // Hent alle stemmer fra de runder
+//        Collection<Vote> votes = new ArrayList<>();
+//        for (Round value : rounds) {
+//            votes.addAll(value.getVoteCollection());
+//        }
+//
+//        // Hent person fra stemme. 
+//        Collection<Person> persons = new ArrayList<>();
+//        for (Vote vote : votes) {
+//
+//            persons.add(vote.getPerson());
+//        }
+//        return persons;
     }
 
     @Override
