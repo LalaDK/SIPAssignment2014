@@ -36,6 +36,4 @@ public interface IDataManager {
     public Collection<Person> getAllStudents();
     
     public void saveVote(Vote vote);
-   
-   
 }

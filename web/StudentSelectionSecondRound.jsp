@@ -84,7 +84,7 @@
             <div id="success" class="alert alert-success">Votes saved successfully!</div>
             <form name="studenSecondRoundVote" action="StudentSecondRoundVote" onsubmit="return checkRadiobuttons()">
                 <h3>Select student:</h3>
-                <select name="studentid" class="dropdown-students">
+                <select name="studentid" id="studentid" class="dropdown-students">
                     <c:forEach var="student" items="${students}">
                         <option value="${student.PId}">${student.name}</option>
                     </c:forEach>

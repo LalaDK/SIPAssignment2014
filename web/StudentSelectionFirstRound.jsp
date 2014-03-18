@@ -8,13 +8,29 @@
         <script src="js/jquery-1.11.0.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
-            $("#bla :checkbox").click(function() {
-                if ($("#bla :checkbox:checked").length >= 4) {
-                    $("#bla :checkbox:not(:checked)").attr("disabled", "disabled");
-                } else {
-                    $("#bla :checkbox").attr("disabled", "");
-                }
+            $(document).ready(function() {
+                $("#subjects").hide();
+
+                $('#selectStudent').click(function() {
+                    $("#subjects").toggle("slow");
+                    $("#selectStudent").prop("disabled", true);
+                    $("#studentid").prop("disabled", true);
+                });
+
+
+                $("input[type=checkbox][name=firstpriority]").click(function() {
+                    var bol = $("input[type=checkbox][name=firstpriority]:checked").length >= 2;
+                    $("input[type=checkbox][name=firstpriority]").not(":checked").attr("disabled", bol);
+                });
+                $("input[type=checkbox][name=secondpriority]").click(function() {
+                    var bol = $("input[type=checkbox][name=secondpriority]:checked").length >= 2;
+                    $("input[type=checkbox][name=secondpriority]").not(":checked").attr("disabled", bol);
+                });
             });
+            
+            function checkboxes(){
+                
+            }
         </script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style1.css" rel="stylesheet">
@@ -43,37 +59,40 @@
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
-            <h3>Select student:</h3>
-            <select name="studentid" class="dropdown-students">
-                <c:forEach var="student" items="${students}">
-                    <option value="${student.PId}">${student.name}</option>
-                </c:forEach>
-            </select>
-            <input value="Select student" type="button" id="selectStudent" class="btn btn-primary"/>
-            <br />
-            <h3>Pool A:</h3>
-            <div id="subjects">
-                <table class="table table-striped table-bordered">
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Teacher</th>
-                        <th>Description</th>
-                        <th>1 P.</th>
-                        <th>2 P.</th>
-                    </tr>
-                    <c:forEach var="s" items="${subjects}">
-                        <tr>
-                            <td class="td-subject-id">${s.SId}</td>
-                            <td>${s.subjectname}</td>
-                            <td></td>
-                            <td>${fn:substring(s.description,0,65)}...</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
+            <form name="studenSecondRoundVote" action="StudentFirstRoundVote" onsubmit="">
+                <h3>Select student:</h3>
+                <select name="studentid" id="studentid" class="dropdown-students">
+                    <c:forEach var="student" items="${students}">
+                        <option value="${student.PId}">${student.name}</option>
                     </c:forEach>
-                </table>
-            </div>
+                </select>
+                <input value="Select student" type="button" id="selectStudent" class="btn btn-primary"/>
+                <br />
+                <div id="subjects">
+                    <h3>Subjects:</h3>
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Teacher</th>
+                            <th>Description</th>
+                            <th>1 P.</th>
+                            <th>2 P.</th>
+                        </tr>
+                        <c:forEach var="s" items="${subjects}">
+                            <tr>
+                                <td class="td-subject-id">${s.SId}</td>
+                                <td>${s.subjectname}</td>
+                                <td></td>
+                                <td>${fn:substring(s.description,0,65)}...</td>
+                                <td><input type="checkbox" id="firstpriority" name="firstpriority"></td>
+                                <td><input type="checkbox" id="secondpriority" name="secondpriority"></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                    <input id="submitVotes" type="submit" value="Submit" class="btn btn-primary">
+                </div>
+            </form>
         </div>
     </body>
 </html>
