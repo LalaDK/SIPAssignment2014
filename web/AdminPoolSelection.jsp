@@ -1,8 +1,3 @@
-<%-- 
-    Document   : AdminPoolSelection
-    Created on : 05-03-2014, 22:25:41
-    Author     : Thomas
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -68,7 +63,7 @@
                         }, {
                             name: 'Satisfied',
                             data: [data["satisfied"]],
-                            color: '#80FF00'
+                            color: '#BFFF00'
                         }, {
                             name: 'Above Average',
                             data: [data["above_average"]],
