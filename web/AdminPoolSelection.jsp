@@ -10,6 +10,7 @@
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <script>
             $(document).ready(function(data) {
+                drawChart();
                 getSatisfaction();
             });
 
@@ -40,6 +41,16 @@
             }
 
             function updateChart(data) {
+                var chart = $('#chart-container').highcharts();
+                chart.series[0].setData([data["very_satisfied"]]);
+                chart.series[1].setData([data["satisfied"]]);
+                chart.series[2].setData([data["above_average"]]);
+                chart.series[3].setData([data["below_average"]]);
+                chart.series[4].setData([data["unsatisfied"]]);
+                chart.series[5].setData([data["very_unsatisfied"]]);
+            }
+
+            function drawChart() {
                 $('#chart-container').highcharts({
                     chart: {
                         type: 'column'
@@ -53,32 +64,33 @@
                     yAxis: {
                         title: {
                             text: 'Students'
-                        }
+                        },
+                        allowDecimals: false
                     },
                     series: [{
                             name: 'Very Satisfied',
-                            data: [data["very_satisfied"]],
+                            data: [0],
                             color: '#00FF00'
-                            
+
                         }, {
                             name: 'Satisfied',
-                            data: [data["satisfied"]],
+                            data: [0],
                             color: '#BFFF00'
                         }, {
                             name: 'Above Average',
-                            data: [data["above_average"]],
+                            data: [0],
                             color: '#FFFF00'
                         }, {
                             name: 'Below Average',
-                            data: [data["below_average"]],
+                            data: [0],
                             color: '#FFBF00'
                         }, {
                             name: 'Unsatisfied',
-                            data: [data["unsatisfied"]],
+                            data: [0],
                             color: '#FF8000'
                         }, {
                             name: 'Very Unsatisfied',
-                            data: [data["very_unsatisfied"]],
+                            data: [0],
                             color: '#FF0000'
                         }]
                 });
