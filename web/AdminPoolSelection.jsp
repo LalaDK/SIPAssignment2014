@@ -69,6 +69,20 @@
                         series: {
                             events: {
                                 legendItemClick: function(event) {
+                                    var group = this.name;
+                                    if (group === "Very Satisfied") {
+                                        $(".fancybox").prop("href", "GetSatisfactionForGroup?group=very_satisfied");
+                                    } else if (group === "Satisfied") {
+                                        $(".fancybox").prop("href", "GetSatisfactionForGroup?group=satisfied");
+                                    } else if (group === "Above Average") {
+                                        $(".fancybox").prop("href", "GetSatisfactionForGroup?group=above_average");
+                                    } else if (group === "Below Average") {
+                                        $(".fancybox").prop("href", "GetSatisfactionForGroup?group=below_average");
+                                    } else if (group === "Unsatisfied") {
+                                        $(".fancybox").prop("href", "GetSatisfactionForGroup?group=unsatisfied");
+                                    } else if (group === "Very Unsatisfied") {
+                                        $(".fancybox").prop("href", "GetSatisfactionForGroup?group=very_unsatisfied");
+                                    }
                                     $(".fancybox").trigger("click");
                                     return false;
                                 }

@@ -5,12 +5,10 @@
  */
 package servlets;
 
-import com.google.gson.Gson;
 import entities.Person;
 import entities.Vote;
 import interfaces.IDataManager;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.ejb.EJB;
@@ -34,14 +32,12 @@ public class GetSatisfactionForGroup extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-//        String group = request.getParameter("group");
-        String group = "satisfied";
+        String group = request.getParameter("group");
+        System.out.println(group);
 
         response.setContentType("text/html;charset=UTF-8");
-        Gson gson = new Gson();
 
         HashMap<String, ArrayList<Person>> result = dataManager.getSatisfaction();
-
         ArrayList<String[]> data = new ArrayList<>();
 
         for (Person p : result.get(group)) {
