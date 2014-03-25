@@ -21,12 +21,6 @@
                     <td>
                         <c:out value="${student}" />
                     </td>
-
-                    <c:forEach var="vote" items="${student.votes}">
-                        <td>
-                            <c:out value="${vote}" />
-                        </td>
-                    </c:forEach>
                 </tr>
             </c:forEach>
         </table>
