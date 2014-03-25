@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import dataTransferObjects.DtoSubject;
 import dummyData.DummyData;
 import entities.Person;
 import entities.Subject;
@@ -48,8 +49,8 @@ public class TestServlet extends HttpServlet {
             
             // getAllSubjectsFromRound(2)
             String subjectFromRound2 = "";
-            Collection<Subject> subjects = entityManager.getAllSubjectsFromRound(2);
-            for (Subject value : subjects) {
+            Collection<DtoSubject> subjects = entityManager.getAllSubjectsFromRound(2);
+            for (DtoSubject value : subjects) {
                 subjectFromRound2 += value.getSubjectname() + "<br>";
             }
             

@@ -5,6 +5,7 @@
  */
 package dummyData;
 
+import dataTransferObjects.DtoSubject;
 import entities.Person;
 import entities.Subject;
 import entities.Vote;
@@ -72,7 +73,7 @@ public class DummyDataTest {
     public void testGetAllSubjectsFromRound() {
         DummyData instance = DummyData.getInstance();
         int round = 2;
-        Collection<Subject> result = instance.getAllSubjectsFromRound(round);
+        Collection<DtoSubject> result = instance.getAllSubjectsFromRound(round);
         assertTrue("Expected subjects in round 2, is 8 subjects", result.size() == 8);
     }
 

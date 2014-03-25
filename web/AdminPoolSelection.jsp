@@ -165,20 +165,21 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Votes</th>
+                    <th>1.P</th>
+                    <th>2.P</th>
                     <th colspan="3">Pool</th>
                 </tr>
                 <c:forEach var="s" items="${subjects}">
                     <tr>
-                        <td class="td-subject-id">${s.SId}</td>
+                        <td class="td-subject-id">${s.sId}</td>
                         <td>${s.subjectname}</td>
 
-                        <td>${fn:substring(s.description,0,65)}...</td>
-                        <c:set var="votes" value="${s.voteCollection}"></c:set>
-                        <td class="td-subject-votes">${fn:length(votes)}</td>
-                        <td class="td-subject-pool">A:<input type="radio" onchange="poolsChanged(this)" name="${s.SId}" value="a" <c:if test="${s.pool == 'a'}">CHECKED</c:if>></td>
-                        <td class="td-subject-pool">B:<input type="radio" onchange="poolsChanged(this)" name="${s.SId}" value="b" <c:if test="${s.pool == 'b'}">CHECKED</c:if>></td>
-                        <td class="td-subject-pool">C:<input type="radio" onchange="poolsChanged(this)" name="${s.SId}" value="c" <c:if test="${s.pool == 'c'}">CHECKED</c:if>></td>
+                        <td>${fn:substring(s.description,0,60)}...</td>
+                        <td class="td-subject-votes">${s.firstRoundFirstPriorityVotes}</td>
+                        <td class="td-subject-votes">${s.firstRoundSecondPriorityVotes}</td>
+                        <td class="td-subject-pool">A:<input type="radio" onchange="poolsChanged(this)" name="${s.sId}" value="a" <c:if test="${s.pool == 'a'}">CHECKED</c:if>></td>
+                        <td class="td-subject-pool">B:<input type="radio" onchange="poolsChanged(this)" name="${s.sId}" value="b" <c:if test="${s.pool == 'b'}">CHECKED</c:if>></td>
+                        <td class="td-subject-pool">C:<input type="radio" onchange="poolsChanged(this)" name="${s.sId}" value="c" <c:if test="${s.pool == 'c'}">CHECKED</c:if>></td>
                         </tr>
                 </c:forEach>
             </table>

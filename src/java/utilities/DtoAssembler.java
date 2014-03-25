@@ -9,6 +9,8 @@ import dataTransferObjects.DtoSubject;
 import entities.Subject;
 import entities.Vote;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -16,28 +18,36 @@ import java.util.ArrayList;
  */
 public class DtoAssembler {
 
-    private static DtoSubject subjectToDtoSubject(Subject subject) {
-        int firstPriority = 0;
-        int secondPriority = 0;
+    public static DtoSubject subjectToDtoSubject(Subject subject) {
+        int firstRoundFirstPriority = 0;
+        int firstRoundSecondPriority = 0;
+        int secondRoundFirstPriority = 0;
+        int secondRoundSecondPriority = 0;
         DtoSubject dto = new DtoSubject();
-        dto.setSId(subject.getSId().intValue());
+        dto.setsId(subject.getSId().intValue());
         dto.setSubjectname(subject.getSubjectname());
         dto.setDescription(subject.getDescription());
         dto.setPool(subject.getPool().toString());
         for (Vote v : subject.getVoteCollection()) {
-            if (v.getPriority().intValue() == 1) {
-                firstPriority++;
-            } else if (v.getPriority().intValue() == 2) {
-                secondPriority++;
+            if (v.getPriority().intValue() == 1 && v.getRound().getRId().intValue() == 1) {
+                firstRoundFirstPriority++;
+            } else if (v.getPriority().intValue() == 2 && v.getRound().getRId().intValue() == 1) {
+                firstRoundSecondPriority++;
+            } else if (v.getPriority().intValue() == 1 && v.getRound().getRId().intValue() == 2) {
+                secondRoundFirstPriority++;
+            } else if (v.getPriority().intValue() == 1 && v.getRound().getRId().intValue() == 2) {
+                secondRoundSecondPriority++;
             }
         }
-        dto.setFirstPriorityVotes(firstPriority);
-        dto.setSecondPriorityVotes(secondPriority);
+        dto.setFirstRoundFirstPriorityVotes(firstRoundFirstPriority);
+        dto.setFirstRoundSecondPriorityVotes(firstRoundSecondPriority);
+        dto.setSecondRoundFirstPriorityVotes(secondRoundFirstPriority);
+        dto.setSecondRoundSecondPriorityVotes(secondRoundSecondPriority);
         return dto;
     }
     
-    private static ArrayList<DtoSubject> subjectsToDtoSubjects(ArrayList<Subject> subjects){
-        ArrayList<DtoSubject> dtoSubjects = new ArrayList();
+    public static Collection<DtoSubject> subjectsToDtoSubjects(List<Subject> subjects){
+        Collection<DtoSubject> dtoSubjects = new ArrayList();
         for(Subject s: subjects){
             dtoSubjects.add(subjectToDtoSubject(s));
         }

@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import dataTransferObjects.DtoSubject;
 import entities.Person;
 import entities.Subject;
 import entities.Vote;
@@ -19,7 +20,7 @@ public interface IDataManager {
 
     public Collection<Subject> getAllSubjects();
 
-    public Collection<Subject> getAllSubjectsFromRound(int round);
+    public Collection<DtoSubject> getAllSubjectsFromRound(int round);
 
     public int getAmountOfVotesFromSubject(int round, int subjectId);
 

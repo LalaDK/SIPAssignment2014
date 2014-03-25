@@ -5,6 +5,7 @@
  */
 package dummyData;
 
+import dataTransferObjects.DtoSubject;
 import entities.Person;
 import entities.Round;
 import entities.Subject;
@@ -15,6 +16,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import utilities.DtoAssembler;
 import utilities.Utilities;
 
 /**
@@ -24,7 +27,7 @@ import utilities.Utilities;
 public class DummyData implements IDataManager {
 
     private static DummyData instance;
-    Collection<Subject> subjects;
+    List<Subject> subjects;
     Collection<Person> persons;
     Collection<Vote> votes;
     Collection<Vote> bjarkevote;
@@ -263,9 +266,9 @@ public class DummyData implements IDataManager {
     }
 
     @Override
-    public Collection<Subject> getAllSubjectsFromRound(int round) {
+    public Collection<DtoSubject> getAllSubjectsFromRound(int round) {
         //Needs update
-        return subjects;
+        return DtoAssembler.subjectsToDtoSubjects(subjects);
     }
 
     @Override

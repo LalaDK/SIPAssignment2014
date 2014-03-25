@@ -14,27 +14,20 @@ public class DtoSubject {
     private int sId;
     private String subjectname;
     private String description;
-    private int firstPriorityVotes;
-    private int secondPriorityVotes;
+    private int firstRoundFirstPriorityVotes;
+    private int firstRoundSecondPriorityVotes;
+    private int secondRoundFirstPriorityVotes;
+    private int secondRoundSecondPriorityVotes;
     private String pool;
-
+    
     public DtoSubject() {
-    }
+    }    
 
-    public DtoSubject(int sId, String subjectname, String description, int firstPriorityVotes, int secondPriorityVotes, String pool) {
-        this.sId = sId;
-        this.subjectname = subjectname;
-        this.description = description;
-        this.firstPriorityVotes = firstPriorityVotes;
-        this.secondPriorityVotes = secondPriorityVotes;
-        this.pool = pool;
-    }
-
-    public int getSId() {
+    public int getsId() {
         return sId;
     }
 
-    public void setSId(int sId) {
+    public void setsId(int sId) {
         this.sId = sId;
     }
 
@@ -54,20 +47,36 @@ public class DtoSubject {
         this.description = description;
     }
 
-    public int getFirstPriorityVotes() {
-        return firstPriorityVotes;
+    public int getFirstRoundFirstPriorityVotes() {
+        return firstRoundFirstPriorityVotes;
     }
 
-    public void setFirstPriorityVotes(int firstPriorityVotes) {
-        this.firstPriorityVotes = firstPriorityVotes;
+    public void setFirstRoundFirstPriorityVotes(int firstRoundFirstPriorityVotes) {
+        this.firstRoundFirstPriorityVotes = firstRoundFirstPriorityVotes;
     }
 
-    public int getSecondPriorityVotes() {
-        return secondPriorityVotes;
+    public int getFirstRoundSecondPriorityVotes() {
+        return firstRoundSecondPriorityVotes;
     }
 
-    public void setSecondPriorityVotes(int secondPriorityVotes) {
-        this.secondPriorityVotes = secondPriorityVotes;
+    public void setFirstRoundSecondPriorityVotes(int firstRoundSecondPriorityVotes) {
+        this.firstRoundSecondPriorityVotes = firstRoundSecondPriorityVotes;
+    }
+
+    public int getSecondRoundFirstPriorityVotes() {
+        return secondRoundFirstPriorityVotes;
+    }
+
+    public void setSecondRoundFirstPriorityVotes(int secondRoundFirstPriorityVotes) {
+        this.secondRoundFirstPriorityVotes = secondRoundFirstPriorityVotes;
+    }
+
+    public int getSecondRoundSecondPriorityVotes() {
+        return secondRoundSecondPriorityVotes;
+    }
+
+    public void setSecondRoundSecondPriorityVotes(int secondRoundSecondPriorityVotes) {
+        this.secondRoundSecondPriorityVotes = secondRoundSecondPriorityVotes;
     }
 
     public String getPool() {
@@ -77,6 +86,6 @@ public class DtoSubject {
     public void setPool(String pool) {
         this.pool = pool;
     }
-
+    
     
 }

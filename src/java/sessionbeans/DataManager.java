@@ -5,6 +5,7 @@
  */
 package sessionbeans;
 
+import dataTransferObjects.DtoSubject;
 import entities.Person;
 import entities.Round;
 import entities.Subject;
@@ -18,6 +19,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import utilities.DtoAssembler;
 
 /**
  *
@@ -35,7 +37,7 @@ public class DataManager implements IDataManager {
     }
 
     @Override
-    public Collection<Subject> getAllSubjectsFromRound(int round) {
+    public Collection<DtoSubject> getAllSubjectsFromRound(int round) {
         // Hent runder hvor rundno er den givne parameter
         List<Round> subjectsInRound = em.createNamedQuery("Round.findByRoundno", Round.class).setParameter("roundno", round).getResultList();
 
@@ -47,7 +49,7 @@ public class DataManager implements IDataManager {
             Subject s = subjectsInRound.get(i).getSId();
             result.add(s);
         }
-        return result;
+        return DtoAssembler.subjectsToDtoSubjects(result);
     }
 
     @Override
@@ -115,7 +117,7 @@ public class DataManager implements IDataManager {
 
     @Override
     public HashMap<String, ArrayList<Person>> getSatisfaction() {
-        Collection<Person> persons = getAllPersonsInRound(2);
+        Collection<Person> persons = getAllPersonsInRound(1);
         Collection<Subject> subjects = getAllSubjects();
         return utilities.Utilities.getSatisfaction(subjects, persons);
     }
