@@ -8,10 +8,14 @@
         <script src="js/jquery-1.11.0.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
+        <link rel="stylesheet" href="source/jquery.fancybox.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="source/jquery.fancybox.pack.js"></script>
+
         <script>
             $(document).ready(function(data) {
                 drawChart();
                 getSatisfaction();
+                $(".fancybox").fancybox();
             });
 
             function getSatisfaction() {
@@ -54,6 +58,16 @@
                 $('#chart-container').highcharts({
                     chart: {
                         type: 'column'
+                    },
+                    plotOptions: {
+                        series: {
+                            events: {
+                                legendItemClick: function(event) {
+                                    alert();
+                                    return false;
+                                }
+                            }
+                        }
                     },
                     title: {
                         text: 'Student Satisfaction'
@@ -103,6 +117,8 @@
     </head>
     <body>
         <div>
+            <a class="fancybox" href="#data">Test</a>
+            <div style="display:none"><div id="data"></div></div>
             <h1>Subject Administration</h1>
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
