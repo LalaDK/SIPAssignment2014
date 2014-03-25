@@ -12,10 +12,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -45,14 +46,15 @@ public class UtilitiesTest {
     /**
      * Test of getSatisfaction method, of class Utilities.
      */
+    @Ignore
     @Test
     public void testGetSatisfaction() {
         System.out.println("getSatisfaction");
         Collection<Subject> subjects = null;
         Collection<Person> persons = null;
         HashMap<String, Integer> expResult = null;
-        HashMap<String, Integer> result = Utilities.getSatisfaction(subjects, persons);
-        assertEquals(expResult, result);
+//        HashMap<String, Integer> result = Utilities.getSatisfaction(subjects, persons);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

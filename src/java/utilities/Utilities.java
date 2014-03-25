@@ -9,8 +9,8 @@ import java.util.HashMap;
 
 public class Utilities {
 
-    public static HashMap<String, Integer> getSatisfaction(Collection<Subject> subjects, Collection<Person> persons) {
-        HashMap<String, Integer> result = getLevelsOfSatisfaction();
+    public static HashMap<String, ArrayList<Person>> getSatisfaction(Collection<Subject> subjects, Collection<Person> persons) {
+        HashMap<String, ArrayList<Person>> result = getLevelsOfSatisfaction();
         ArrayList<Subject> poolA = new ArrayList<>();
         ArrayList<Subject> poolB = new ArrayList<>();
 
@@ -73,7 +73,7 @@ public class Utilities {
                     firstPriorityFullfilledPoolA,
                     firstPriorityFullfilledPoolB, result,
                     secondPriorityFullfilledPoolB,
-                    secondPriorityFullfilledPoolA);
+                    secondPriorityFullfilledPoolA, p);
         }
 
         return result;
@@ -93,22 +93,23 @@ public class Utilities {
     private static void decideLevelOfSatisfaction(
             boolean firstPriorityFullfilledPoolA,
             boolean firstPriorityFullfilledPoolB,
-            HashMap<String, Integer> result,
+            HashMap<String, ArrayList<Person>> result,
             boolean secondPriorityFullfilledPoolB,
-            boolean secondPriorityFullfilledPoolA) {
+            boolean secondPriorityFullfilledPoolA, Person p) {
+        
         if (firstPriorityFullfilledPoolA && firstPriorityFullfilledPoolB) {
-            result.put("very_satisfied", result.get("very_satisfied") + 1);
+            result.get("very_satisfied").add(p);
         } else if ((firstPriorityFullfilledPoolA && secondPriorityFullfilledPoolB)
                 || (firstPriorityFullfilledPoolB && secondPriorityFullfilledPoolA)) {
-            result.put("satisfied", result.get("satisfied") + 1);
+            result.get("satisfied").add(p);
         } else if (secondPriorityFullfilledPoolA && secondPriorityFullfilledPoolB) {
-            result.put("above_average", result.get("above_average") + 1);
+            result.get("above_average").add(p);
         } else if (firstPriorityFullfilledPoolA || firstPriorityFullfilledPoolB) {
-            result.put("below_average", result.get("below_average") + 1);
+            result.get("below_average").add(p);
         } else if (secondPriorityFullfilledPoolA || secondPriorityFullfilledPoolB) {
-            result.put("unsatisfied", result.get("unsatisfied") + 1);
+            result.get("unsatisfied").add(p);
         } else {
-            result.put("very_unsatisfied", result.get("very_unsatisfied") + 1);
+            result.get("very_unsatisfied").add(p);
         }
     }
 
@@ -124,14 +125,14 @@ public class Utilities {
         }
     }
 
-    private static HashMap<String, Integer> getLevelsOfSatisfaction() {
-        HashMap<String, Integer> result = new HashMap<>();
-        result.put("very_satisfied", 0);
-        result.put("satisfied", 0);
-        result.put("above_average", 0);
-        result.put("below_average", 0);
-        result.put("unsatisfied", 0);
-        result.put("very_unsatisfied", 0);
+    private static HashMap<String, ArrayList<Person>> getLevelsOfSatisfaction() {
+        HashMap<String, ArrayList<Person>> result = new HashMap<>();
+        result.put("very_satisfied", new ArrayList<Person>());
+        result.put("satisfied", new ArrayList<Person>());
+        result.put("above_average", new ArrayList<Person>());
+        result.put("below_average", new ArrayList<Person>());
+        result.put("unsatisfied", new ArrayList<Person>());
+        result.put("very_unsatisfied", new ArrayList<Person>());
         return result;
     }
 }

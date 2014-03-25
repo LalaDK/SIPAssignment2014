@@ -316,7 +316,7 @@ public class DummyData implements IDataManager {
     }
 
     @Override
-    public HashMap<String, Integer> getSatisfaction() {
+    public HashMap<String, ArrayList<Person>> getSatisfaction() {
         ArrayList<Subject> stmp = new ArrayList<>(subjects);
         ArrayList<Person> ptmp = new ArrayList<>(persons);
         return Utilities.getSatisfaction(stmp, ptmp);

@@ -5,10 +5,11 @@
  */
 package interfaces;
 
-import entities.Subject;
 import entities.Person;
+import entities.Subject;
 import entities.Vote;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import javax.ejb.Local;
@@ -32,7 +33,7 @@ public interface IDataManager {
     
     public void updatePoolOnSubject(int subjectId, char pool);
     
-    public HashMap<String, Integer> getSatisfaction();
+    public HashMap<String, ArrayList<Person>> getSatisfaction();
     
     public Collection<Person> getAllStudents();
     
