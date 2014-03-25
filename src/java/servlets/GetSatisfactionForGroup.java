@@ -33,7 +33,6 @@ public class GetSatisfactionForGroup extends HttpServlet {
             throws ServletException, IOException {
 
         String group = request.getParameter("group");
-        System.out.println(group);
 
         response.setContentType("text/html;charset=UTF-8");
 
