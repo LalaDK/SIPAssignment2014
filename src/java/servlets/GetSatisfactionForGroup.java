@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mads
  */
-@WebServlet(name = "GetSatisfactionShitEllerSådanNoget", urlPatterns = {"/GetSatisfactionShitEllerS_danNoget"})
+@WebServlet(name = "GetSatisfactionForGroup", urlPatterns = {"/GetSatisfactionForGroup"})
 public class GetSatisfactionForGroup extends HttpServlet {
 
     private IDataManager dataManager;
@@ -35,28 +36,28 @@ public class GetSatisfactionForGroup extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         Gson gson = new Gson();
-        try (PrintWriter out = response.getWriter()) {
-            HashMap<String, ArrayList<Person>> result = dataManager.getSatisfaction();
 
-            ArrayList<String[]> data = new ArrayList<>();
+        HashMap<String, ArrayList<Person>> result = dataManager.getSatisfaction();
 
-            for (Person p : result.get(group)) {
-                ArrayList<Vote> votes = new ArrayList<>();
-                for (Vote vote : p.getVoteCollection()) {
-                    votes.add(vote);
-                }
+        ArrayList<String[]> data = new ArrayList<>();
 
-                data.add(new String[]{
-                    p.getName(),
-                    votes.get(0).getSubject().getSubjectname(),
-                    votes.get(1).getSubject().getSubjectname(),
-                    votes.get(2).getSubject().getSubjectname(),
-                    votes.get(3).getSubject().getSubjectname(),});
+        for (Person p : result.get(group)) {
+            ArrayList<Vote> votes = new ArrayList<>();
+            for (Vote vote : p.getVoteCollection()) {
+                votes.add(vote);
             }
 
-            System.out.println(gson.toJson(data));
-            out.println(gson.toJson(data));
+            data.add(new String[]{
+                p.getName(),
+                votes.get(0).getSubject().getSubjectname(),
+                votes.get(1).getSubject().getSubjectname(),
+                votes.get(2).getSubject().getSubjectname(),
+                votes.get(3).getSubject().getSubjectname(),});
         }
+        System.out.println(gson.toJson(data));
+                RequestDispatcher dispatcher =
+                request.getRequestDispatcher("/studentSatisfactionLightBox.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

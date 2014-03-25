@@ -15,7 +15,13 @@
             $(document).ready(function(data) {
                 drawChart();
                 getSatisfaction();
-                $(".fancybox").fancybox();
+                $(".fancybox").fancybox({
+                    helpers: {
+                        title: {
+                            type: 'over'
+                        }
+                    }
+                });
             });
 
             function getSatisfaction() {
@@ -63,7 +69,8 @@
                         series: {
                             events: {
                                 legendItemClick: function(event) {
-                                    alert();
+                                    alert(this.name);
+                                    $(".fancybox").trigger("click");
                                     return false;
                                 }
                             }
@@ -117,8 +124,7 @@
     </head>
     <body>
         <div>
-            <a class="fancybox" href="#data">Test</a>
-            <div style="display:none"><div id="data"></div></div>
+            <a class="fancybox" data-fancybox-type="iframe" href="GetSatisfactionForGroup" style="display:none"></a>
             <h1>Subject Administration</h1>
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
