@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,13 +27,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "GetSatisfactionForGroup", urlPatterns = {"/GetSatisfactionForGroup"})
 public class GetSatisfactionForGroup extends HttpServlet {
-
+    @EJB
     private IDataManager dataManager;
+
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String group = request.getParameter("group");
+//        String group = request.getParameter("group");
+        String group = "satisfied";
 
         response.setContentType("text/html;charset=UTF-8");
         Gson gson = new Gson();
@@ -49,15 +52,16 @@ public class GetSatisfactionForGroup extends HttpServlet {
 
             data.add(new String[]{
                 p.getName(),
-                votes.get(0).getSubject().getSubjectname(),
-                votes.get(1).getSubject().getSubjectname(),
-                votes.get(2).getSubject().getSubjectname(),
-                votes.get(3).getSubject().getSubjectname(),});
+                "(" + votes.get(0).getPriority() + ") " + votes.get(0).getSubject().getSubjectname(),
+                "(" + votes.get(0).getPriority() + ") " + votes.get(1).getSubject().getSubjectname(),
+                "(" + votes.get(0).getPriority() + ") " + votes.get(2).getSubject().getSubjectname(),
+                "(" + votes.get(0).getPriority() + ") " + votes.get(3).getSubject().getSubjectname(),});
         }
-        System.out.println(gson.toJson(data));
-                RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/studentSatisfactionLightBox.jsp");
+        request.setAttribute("students", data);
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("/studentSatisfactionLightbox.jsp");
         dispatcher.forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

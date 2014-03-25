@@ -28,7 +28,6 @@ public class AdminPoolSelection extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setAttribute("subjects", dataManager.getAllSubjectsFromRound(2));
-
         RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/AdminPoolSelection.jsp");
         dis.forward(request, response);
     }

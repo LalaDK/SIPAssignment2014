@@ -69,7 +69,6 @@
                         series: {
                             events: {
                                 legendItemClick: function(event) {
-                                    alert(this.name);
                                     $(".fancybox").trigger("click");
                                     return false;
                                 }
