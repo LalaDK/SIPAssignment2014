@@ -48,10 +48,10 @@ public class GetSatisfactionForGroup extends HttpServlet {
 
                 data.add(new String[]{
                     p.getName(),
-                    votes.get(0).getSubject().getSubjectname(),
-                    votes.get(1).getSubject().getSubjectname(),
-                    votes.get(2).getSubject().getSubjectname(),
-                    votes.get(3).getSubject().getSubjectname(),});
+                    "(" + votes.get(0).getPriority() + ") " + votes.get(0).getSubject().getSubjectname(),
+                    "(" + votes.get(0).getPriority() + ") " + votes.get(1).getSubject().getSubjectname(),
+                    "(" + votes.get(0).getPriority() + ") " + votes.get(2).getSubject().getSubjectname(),
+                    "(" + votes.get(0).getPriority() + ") " + votes.get(3).getSubject().getSubjectname(),});
             }
 
             System.out.println(gson.toJson(data));
