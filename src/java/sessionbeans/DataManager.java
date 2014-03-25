@@ -114,7 +114,7 @@ public class DataManager implements IDataManager {
     }
 
     @Override
-    public HashMap<String, Integer> getSatisfaction() {
+    public HashMap<String, ArrayList<Person>> getSatisfaction() {
         Collection<Person> persons = getAllPersonsInRound(2);
         Collection<Subject> subjects = getAllSubjects();
         return utilities.Utilities.getSatisfaction(subjects, persons);

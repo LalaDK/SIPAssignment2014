@@ -150,13 +150,14 @@ public class DummyDataTest {
     /**
      * Test of getSatisfaction method, of class DummyData.
      */
+    @Ignore
     @Test
     public void testGetSatisfaction() {
         System.out.println("getSatisfaction");
         DummyData instance = null;
         HashMap<String, Integer> expResult = null;
-        HashMap<String, Integer> result = instance.getSatisfaction();
-        assertEquals(expResult, result);
+//        HashMap<String, Integer> result = instance.getSatisfaction();
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
