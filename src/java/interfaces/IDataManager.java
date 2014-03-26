@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import dataTransferObjects.DtoStudent;
 import dataTransferObjects.DtoSubject;
 import entities.Person;
 import entities.Subject;
@@ -25,6 +26,8 @@ public interface IDataManager {
     public int getAmountOfVotesFromSubject(int round, int subjectId);
 
     public Collection<Person> getAllPersonsInRound(int round);
+    
+    public Collection<DtoStudent> getAllStudentsInRound(int round);
 
     public void saveAllSubjects(Collection<Subject> subjects);
     
@@ -34,9 +37,9 @@ public interface IDataManager {
     
     public void updatePoolOnSubject(int subjectId, char pool);
     
-    public HashMap<String, ArrayList<Person>> getSatisfaction();
+    public HashMap<String, ArrayList<DtoStudent>> getSatisfaction();
     
-    public Collection<Person> getAllStudents();
+    public Collection<DtoStudent> getAllStudents();
     
     public void saveVote(Vote vote);
     

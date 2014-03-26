@@ -6,6 +6,7 @@
 
 package servlets;
 
+import dataTransferObjects.DtoStudent;
 import dummyData.DummyData;
 import entities.Person;
 import entities.Subject;
@@ -32,7 +33,7 @@ public class StudentSelectionSecondRound extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Collection<Subject> poola = dataManager.getSubjectsFromPool('a');
         Collection<Subject> poolb = dataManager.getSubjectsFromPool('b');
-        Collection<Person> students = dataManager.getAllPersonsInRound(2);
+        Collection<DtoStudent> students = dataManager.getAllStudents();
         request.setAttribute("asubjects", poola);
         request.setAttribute("bsubjects", poolb);
         request.setAttribute("students", students);

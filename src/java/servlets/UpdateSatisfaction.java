@@ -6,6 +6,7 @@
 package servlets;
 
 import com.google.gson.Gson;
+import dataTransferObjects.DtoStudent;
 import entities.Person;
 import interfaces.IDataManager;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class UpdateSatisfaction extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Gson gson = new Gson();
         try (PrintWriter out = response.getWriter()) {
-            HashMap<String, ArrayList<Person>> result = dataManager.getSatisfaction();
+            HashMap<String, ArrayList<DtoStudent>> result = dataManager.getSatisfaction();
             HashMap<String, Integer> count = new HashMap<>();
             
             for(String key : result.keySet()) {

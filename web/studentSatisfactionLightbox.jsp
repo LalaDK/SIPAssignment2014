@@ -9,18 +9,25 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style1.css" rel="stylesheet">
     <div id="persontable">
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered table-lightbox">
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Description</th>
-                <th>Votes</th>
+                <th>Vote</th>
+                <th>Vote</th>
+                <th>Vote</th>
+                <th>Vote</th>
             </tr>
             <c:forEach var="student" items="${students}">
                 <tr>
-                    <td>
-                        <c:out value="${student}" />
-                    </td>
+                    <td class="td-subject-id">${student.pId}</td>
+                    <td class="td-subject-name">${student.name}</td>
+                    <c:forEach var="subject" items="${student.firstRoundFirstPriority}">
+                        <td>${subject}</td>
+                    </c:forEach>
+                    <c:forEach var="subject" items="${student.firstRoundSecondPriority}">
+                        <td>${subject}</td>
+                    </c:forEach>
                 </tr>
             </c:forEach>
         </table>

@@ -5,6 +5,7 @@
  */
 package dummyData;
 
+import dataTransferObjects.DtoStudent;
 import dataTransferObjects.DtoSubject;
 import entities.Person;
 import entities.Subject;
@@ -169,7 +170,7 @@ public class DummyDataTest {
     @Test
     public void testGetAllStudents() {
         DummyData instance = DummyData.getInstance();
-        Collection<Person> result = instance.getAllStudents();
+        Collection<DtoStudent> result = instance.getAllStudents();
         assertTrue(result.size() == 4);
     }
 

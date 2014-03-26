@@ -6,6 +6,7 @@
 
 package servlets;
 
+import dataTransferObjects.DtoStudent;
 import entities.Person;
 import entities.Subject;
 import interfaces.IDataManager;
@@ -42,7 +43,7 @@ public class StudentSelectionFirstRound extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Collection<Subject> subjects = dataManager.getAllSubjects();
-        Collection<Person> students = dataManager.getAllStudents();
+        Collection<DtoStudent> students = dataManager.getAllStudents();
         request.setAttribute("subjects", subjects);
         request.setAttribute("students", students);
                 RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/StudentSelectionFirstRound.jsp");

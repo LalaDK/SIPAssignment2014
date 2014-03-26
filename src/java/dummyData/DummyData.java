@@ -5,6 +5,7 @@
  */
 package dummyData;
 
+import dataTransferObjects.DtoStudent;
 import dataTransferObjects.DtoSubject;
 import entities.Person;
 import entities.Round;
@@ -28,7 +29,7 @@ public class DummyData implements IDataManager {
 
     private static DummyData instance;
     List<Subject> subjects;
-    Collection<Person> persons;
+    List<Person> persons;
     Collection<Vote> votes;
     Collection<Vote> bjarkevote;
     Collection<Vote> martinvote;
@@ -319,15 +320,20 @@ public class DummyData implements IDataManager {
     }
 
     @Override
-    public HashMap<String, ArrayList<Person>> getSatisfaction() {
+    public HashMap<String, ArrayList<DtoStudent>> getSatisfaction() {
         ArrayList<Subject> stmp = new ArrayList<>(subjects);
         ArrayList<Person> ptmp = new ArrayList<>(persons);
-        return Utilities.getSatisfaction(stmp, ptmp);
+        HashMap<String, ArrayList<Person>> tmp = utilities.Utilities.getSatisfaction(subjects, persons);
+        HashMap<String, ArrayList<DtoStudent>> students = new HashMap();
+        for (String k : tmp.keySet()) {
+            students.put(k, new ArrayList<>(DtoAssembler.studentsToDtoStudents(tmp.get(k))));
+        }
+        return students;
     }
 
     @Override
-    public Collection<Person> getAllStudents() {
-        return persons;
+    public Collection<DtoStudent> getAllStudents() {
+        return DtoAssembler.studentsToDtoStudents(persons);
     }
 
     @Override
@@ -342,5 +348,10 @@ public class DummyData implements IDataManager {
 
     public void killInstance() {
         instance = null;
+    }
+
+    @Override
+    public Collection<DtoStudent> getAllStudentsInRound(int round) {
+        return DtoAssembler.studentsToDtoStudents(persons);
     }
 }

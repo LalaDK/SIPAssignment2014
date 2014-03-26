@@ -16,6 +16,7 @@
                 drawChart();
                 getSatisfaction();
                 $(".fancybox").fancybox({
+                    'width': 920,
                     helpers: {
                         title: {
                             type: 'over'

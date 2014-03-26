@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import dataTransferObjects.DtoStudent;
 import entities.Person;
 import entities.Vote;
 import interfaces.IDataManager;
@@ -36,23 +37,10 @@ public class GetSatisfactionForGroup extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
 
-        HashMap<String, ArrayList<Person>> result = dataManager.getSatisfaction();
-        ArrayList<String[]> data = new ArrayList<>();
+        HashMap<String, ArrayList<DtoStudent>> result = dataManager.getSatisfaction();
 
-        for (Person p : result.get(group)) {
-            ArrayList<Vote> votes = new ArrayList<>();
-            for (Vote vote : p.getVoteCollection()) {
-                votes.add(vote);
-            }
-
-            data.add(new String[]{
-                p.getName(),
-                "(" + votes.get(0).getPriority() + ") " + votes.get(0).getSubject().getSubjectname(),
-                "(" + votes.get(0).getPriority() + ") " + votes.get(1).getSubject().getSubjectname(),
-                "(" + votes.get(0).getPriority() + ") " + votes.get(2).getSubject().getSubjectname(),
-                "(" + votes.get(0).getPriority() + ") " + votes.get(3).getSubject().getSubjectname(),});
-        }
-        request.setAttribute("students", data);
+        
+        request.setAttribute("students", result.get(group));
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/studentSatisfactionLightbox.jsp");
         dispatcher.forward(request, response);

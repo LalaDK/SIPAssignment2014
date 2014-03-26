@@ -5,6 +5,7 @@
  */
 package sessionbeans;
 
+import dataTransferObjects.DtoStudent;
 import dataTransferObjects.DtoSubject;
 import entities.Person;
 import entities.Round;
@@ -97,7 +98,7 @@ public class DataManager implements IDataManager {
     }
 
     @Override
-    public Collection<Person> getAllStudents() {
+    public Collection<DtoStudent> getAllStudents() {
         Query q = em.createNamedQuery("Person.findByPosition", Person.class);
         q.setParameter("position", 'S');
         return q.getResultList();
@@ -116,10 +117,15 @@ public class DataManager implements IDataManager {
     }
 
     @Override
-    public HashMap<String, ArrayList<Person>> getSatisfaction() {
+    public HashMap<String, ArrayList<DtoStudent>> getSatisfaction() {
         Collection<Person> persons = getAllPersonsInRound(1);
         Collection<Subject> subjects = getAllSubjects();
-        return utilities.Utilities.getSatisfaction(subjects, persons);
+        HashMap<String, ArrayList<Person>> tmp = utilities.Utilities.getSatisfaction(subjects, persons);
+        HashMap<String, ArrayList<DtoStudent>> students = new HashMap();
+        for(String k : tmp.keySet()){            
+            students.put(k, new ArrayList<>(DtoAssembler.studentsToDtoStudents(tmp.get(k))));
+        }
+        return students;
     }
 
     @Override
@@ -137,5 +143,21 @@ public class DataManager implements IDataManager {
         for (Vote v : result) {
             em.remove(v);
         }
+    }
+
+    @Override
+    public Collection<DtoStudent> getAllStudentsInRound(int round) {
+        Query q = em.createNamedQuery("Person.findAll", Person.class);
+        Collection<Person> persons = q.getResultList();
+        List<Person> result = new ArrayList<>();
+        for (Person p : persons) {
+            for (Vote v : p.getVoteCollection()) {
+                if (v.getRound().getRoundno().intValue() == round) {
+                    result.add(p);
+                    break;
+                }
+            }
+        }
+        return DtoAssembler.studentsToDtoStudents(result);
     }
 }
