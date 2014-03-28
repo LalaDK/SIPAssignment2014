@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionbeans;
 
 import dataTransferObjects.DtoStudent;
@@ -22,10 +17,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import utilities.DtoAssembler;
 
-/**
- *
- * @author Mads
- */
 @Stateless
 public class DataManager implements IDataManager {
 

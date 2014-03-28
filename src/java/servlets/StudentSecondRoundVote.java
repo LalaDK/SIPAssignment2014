@@ -13,10 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Thomas
- */
 @WebServlet(name = "StudentSecondRoundVote", urlPatterns = {"/StudentSecondRoundVote"})
 public class StudentSecondRoundVote extends HttpServlet {
 

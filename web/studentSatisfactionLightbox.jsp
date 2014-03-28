@@ -13,10 +13,10 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Vote</th>
-                <th>Vote</th>
-                <th>Vote</th>
-                <th>Vote</th>
+                <th>1. Pri</th>
+                <th>1. Pri</th>
+                <th>2. Pri</th>
+                <th>2. Pri</th>
             </tr>
             <c:forEach var="student" items="${students}">
                 <tr>

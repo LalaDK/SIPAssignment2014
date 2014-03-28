@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dummyData;
 
 import dataTransferObjects.DtoStudent;
@@ -21,10 +16,6 @@ import java.util.List;
 import utilities.DtoAssembler;
 import utilities.Utilities;
 
-/**
- *
- * @author Thomas
- */
 public class DummyData implements IDataManager {
 
     private static DummyData instance;

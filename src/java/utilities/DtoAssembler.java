@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utilities;
 
 import dataTransferObjects.DtoStudent;
@@ -14,10 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- *
- * @author Thomas
- */
 public class DtoAssembler {
     
     public static DtoSubject subjectToDtoSubject(Subject subject) {
@@ -70,7 +61,7 @@ public class DtoAssembler {
                 firstRoundFirstPriorities.add(v.getSubject().getSubjectname());
             } else if (v.getPriority().intValue() == 2 && v.getRound().getRId().intValue() == 1) {
                 firstRoundSecondPriorities.add(v.getSubject().getSubjectname());
-            } else if (v.getPriority().intValue() == 2 && v.getRound().getRId().intValue() == 1) {
+            } else if (v.getPriority().intValue() == 1 && v.getRound().getRId().intValue() == 2) {
                 secondRoundFirstPriorities.add(v.getSubject().getSubjectname());
             } else if (v.getPriority().intValue() == 2 && v.getRound().getRId().intValue() == 2) {
                 secondRoundSecondPriorities.add(v.getSubject().getSubjectname());
