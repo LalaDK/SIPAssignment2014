@@ -1,9 +1,7 @@
 package servlets;
 
-import entities.Subject;
 import interfaces.IDataManager;
 import java.io.IOException;
-import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
